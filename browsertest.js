@@ -3,6 +3,8 @@ let http = require('http');
 
 // NOTE: hangs with invalid urn
 
+// This is what I'll work on on the plane.
+
 http.createServer(function (req, res) {
     var mappings = require('./mappings.json') // Reload the json each time so the user can make changes NOTE: This doesn't actually work rn
     let key = req.url.slice(10).toLowerCase() // Convert the search query to lower case and splice out the url header

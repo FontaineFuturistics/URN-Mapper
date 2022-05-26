@@ -23,7 +23,7 @@ http.createServer(function (req, res) {
 
         console.log(str_diff(key, "test"))
 
-    }
+    } // End of diff system loop
 
     
     
@@ -36,14 +36,22 @@ function str_diff(base, ref) {
     base_array = base.split('')
     ref_array = ref.split('')
 
+    // Initialize diff
+    let diff = 0
+
     // For each index in the ref_array
     for (i = 0; i < ref_array.length; i++) {
 
+        // If the arrays are not equal at the given index increase the diff
+        if (base_array[i] != ref_array[i]) {
+            diff++
+        } // End of diff++ gate
 
+    } // End of ref_array for loop
 
-    }
+    return diff
 
-}
+} // End of str_diff function
 
 // Print server status to the console
 console.log("Server Live")

@@ -36,8 +36,6 @@ http.createServer(function (req, res) {
 
         map_url_list = []
 
-        console.log(map_keys.length)
-
         // Run against each key 
         for (i = 0; i < map_keys.length; i++) {
 
@@ -53,6 +51,13 @@ http.createServer(function (req, res) {
             } // End of output add
 
         } // End of each key loop
+
+        // If there is only one option, set map_url to it
+        if (map_url_list.length == 1) {
+
+            map_url = map_url_list[0]
+
+        }
 
     } // End of diff system loop
 

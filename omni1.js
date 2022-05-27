@@ -1,8 +1,6 @@
 // Import http module
-let http = require("http");
-let fs = require("fs");
-const { format } = require("path");
-const { stringify } = require("querystring");
+const http = require("http");
+const fs = require("fs");
 
 // Set diff tolerance fraction
 const diff_tol = 0.25

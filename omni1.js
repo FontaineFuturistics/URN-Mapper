@@ -72,7 +72,7 @@ http.createServer(function (req, res) {
     } else if (map_url_list[0]) {
 
         // TODO: Write the whole list in a pretty format
-        res.write(map_url_list)
+        res.write("Did you mean: " + map_url_list)
         res.end()
         console.log("Gave user " + map_url_list + " options from search " + key)
         return
@@ -99,8 +99,15 @@ function str_diff(base, ref) {
     // Initialize diff
     let diff = 0
 
+    // Get longest length
+    if (base_array.length > ref_array.length) {
+        longest_array = base_array.length
+    } else {
+        longest_array = ref_array.length
+    }
+
     // For each index in the ref_array
-    for (k = 0; k < ref_array.length; k++) {
+    for (k = 0; k < longest_array; k++) {
 
         // If the arrays are not equal at the given index increase the diff
         if (base_array[k] != ref_array[k]) {

@@ -64,7 +64,7 @@ http.createServer(function (req, res) {
     if (map_url) {
 
         res.write("<!DOCTYPE html>\n"); // Start an HTML document
-        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + map_url + "\" />"); // Reroute the user
+        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + map_url.format("test") + "\" />"); // Reroute the user
         res.end(); // End the response
 
         // Log it in the console

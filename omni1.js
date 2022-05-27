@@ -15,7 +15,6 @@ const diff_tol = 0.25
 // Create the HTTP server
 http.createServer(function (req, res) {
 
-    console.log("Request received: " + req.url)
     // If the request is favicon.ico skip for now TODO: Figure out how to handle this
     if (req.url == "/favicon.ico") {
 
@@ -35,16 +34,12 @@ http.createServer(function (req, res) {
     // If that didn't work, move to plan B
     if (map_url == undefined) {
 
-
-        console.log("Plan B")
-        map_url = []
+        map_url_list = []
 
         console.log(map_keys.length)
 
         // Run against each key 
         for (i = 0; i < map_keys.length; i++) {
-
-            console.log("Iteration" + i)
 
             // Get current key
             let ckey = map_keys[i]
@@ -54,16 +49,43 @@ http.createServer(function (req, res) {
 
             // See if diff is low enough
             if (str_diff(key, ckey) <= max_diff) {
-                map_url.push(mappings[ckey])
+                map_url_list.push(mappings[ckey])
             } // End of output add
 
         } // End of each key loop
 
     } // End of diff system loop
 
-    console.log("progress")
-    res.write("output: " + map_url);
-    res.end();
+    // Return the value
+    if (map_url) {
+
+        res.write("<!DOCTYPE html>\n"); // Start an HTML document
+        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + map_url + "\" />"); // Reroute the user
+        res.end(); // End the response
+
+        // Log it in the console
+        console.log("Routed user to " + map_url + " from search " + key);
+
+        // return out of void
+        return
+
+    } else if (map_url_list[0]) {
+
+        // TODO: Write the whole list in a pretty format
+        res.write(map_url_list)
+        res.end()
+        console.log("Gave user " + map_url_list + " options from search " + key)
+        return
+
+    } else {
+
+        // Return failed query
+        res.write("Your query has failed, check your spelling")
+        res.end();
+        console.log("Search " + key + " has failed")
+        return
+
+    }
     
 }).listen(8080);
 

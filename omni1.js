@@ -15,7 +15,13 @@ const diff_tol = 0.25
 // Create the HTTP server
 http.createServer(function (req, res) {
 
-    console.log("Request received")
+    console.log("Request received: " + req.url)
+    // If the request is favicon.ico skip for now TODO: Figure out how to handle this
+    if (req.url == "/favicon.ico") {
+
+        return
+
+    }
 
     let req_str = req.url.split('=', 2)[1] // Split the url on the equals
 
@@ -44,7 +50,7 @@ http.createServer(function (req, res) {
             let ckey = map_keys[i]
 
             // Calculate maximum allowable difference
-            let max_diff = Math.floor(diff_tol * ckey.length)
+            let max_diff = Math.ceil(diff_tol * ckey.length)
 
             // See if diff is low enough
             if (str_diff(key, ckey) <= max_diff) {

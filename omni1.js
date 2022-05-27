@@ -1,11 +1,12 @@
 // Import http module
 let http = require("http");
+let fs = require("fs");
 
-// Import mappings
-let mappings = require("./mappings.json") 
+// Import mappings DEPRECATED, using rtJSON function to get real-time mappings
+//let mappings = require("./mappings.json") 
 
 // Get mapping keys
-let map_keys = Object.keys(mappings)
+//let map_keys = Object.keys(mappings)
 
 // Set diff tolerance fraction
 const diff_tol = 0.25
@@ -21,6 +22,12 @@ http.createServer(function (req, res) {
         return
 
     }
+
+    // Load the mappings
+    let mappings = rtJSON("./mappings.json")
+
+    // Load keys
+    let map_keys = Object.keys(mappings)
 
     let req_str = req.url.split('=', 2)[1] // Split the url on the equals
 
@@ -57,7 +64,7 @@ http.createServer(function (req, res) {
 
             map_url = map_url_list[0]
 
-        }
+        } // End map_url_list concatanation if gate
 
     } // End of diff system loop
 
@@ -86,7 +93,7 @@ http.createServer(function (req, res) {
         } // End list formatting for loop
 
         res.end()
-        
+
         console.log("Gave user " + map_url_list + " options from search " + key) // Log it
         return
 
@@ -98,7 +105,7 @@ http.createServer(function (req, res) {
         console.log("Search " + key + " has failed")
         return
 
-    }
+    } // End output if-else chain
     
 }).listen(8080);
 
@@ -132,6 +139,31 @@ function str_diff(base, ref) {
     return diff
 
 } // End of str_diff function
+
+function rtJSON(fp) {
+    // This will strictly enforce using newline characters because that makes it easier
+
+    file_string = fs.readFileSync("./mappings.json").toString('utf8') // Load the file
+
+    file_array = file_string.split("\n") // Convert it to an array
+
+    let output = {} // Create a variable to hold the output
+
+    //file_array = file_array[1, file_array.length - 1] // Remove the leading and trailing brackets
+
+    for (line = 1; line < file_array.length - 1; line++) {     
+
+        line_data = file_array[line] // Get the line string
+
+        line_data_array = line_data.split("\"") // Split on quotations
+
+        output[line_data_array[1]] = line_data_array[3] // Apply the dict
+
+    } // End each line for loop
+
+    return output // Return the output
+    
+} // rtJSON function
 
 // Print server status to the console
 console.log("Server Live")

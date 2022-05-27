@@ -1,6 +1,6 @@
 {
-    "youtube": "https://youtube.com",
-    "yt": "https://youtube.com",
+    "youtube": "https://www.youtube.com",
+    "yt": "https://www.youtube.com",
     "vt": "https://www.virustotal.com/gui/home/upload",
     "trends": "https://books.google.com/ngrams",
     "collections": "http://www.alicescollections.com/",
@@ -29,5 +29,6 @@
     "classroom": "https://classroom.google.com/u/0/h",
     "metahuman": "https://metahuman.unrealengine.com/",
     "meta": "https://metahuman.unrealengine.com/",
-    "mhc": "https://metahuman.unrealengine.com/"
+    "mhc": "https://metahuman.unrealengine.com/",
+    "ip": "https://whatsmyip.com"
 }

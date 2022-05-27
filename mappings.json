@@ -37,5 +37,6 @@
     "facebook": "https://facebook.com/",
     "fb": "https://facebook.com/",
     "instagram": "https://instagram.com/",
-    "insta": "https://instagram.com/"
+    "insta": "https://instagram.com/",
+    "ddg": "https://duckduckgo.com/?q=%s"
 }

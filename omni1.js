@@ -1,6 +1,8 @@
 // Import http module
 let http = require("http");
 let fs = require("fs");
+const { format } = require("path");
+const { stringify } = require("querystring");
 
 // Set diff tolerance fraction
 const diff_tol = 0.25
@@ -64,7 +66,7 @@ http.createServer(function (req, res) {
     if (map_url) {
 
         res.write("<!DOCTYPE html>\n"); // Start an HTML document
-        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + map_url.format("test") + "\" />"); // Reroute the user
+        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + map_url.replace("%s", req_str.split("+", ).slice(1).join("+")) + "\" />"); // Reroute the user
         res.end(); // End the response
 
         // Log it in the console

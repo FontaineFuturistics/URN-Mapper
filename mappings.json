@@ -8,11 +8,11 @@
     "steamcharts": "https://steamcharts.com/",
     "dcjs": "https://discord.js.org/#/docs/discord.js/stable/general/welcome",
     "help": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "google": "https://google.com/search?q=%s",
+    "google": "https://google.com",
     "translate": "https://translate.google.com/",
     "firnando": "http://firnando.org",
     "firnandonomicon": "http://firnando.org/img/Firnandonomicon.pdf",
-    "bing": "https://bing.com",
+    "bing": "https://bing.com/",
     "optifine": "https://www.optifine.net/home",
     "forge": "https://files.minecraftforge.net/net/minecraftforge/forge/",
     "harold": "https://github.com/FontaineFuturistics/CoF-Harold-V3",
@@ -30,5 +30,6 @@
     "metahuman": "https://metahuman.unrealengine.com/",
     "meta": "https://metahuman.unrealengine.com/",
     "mhc": "https://metahuman.unrealengine.com/",
-    "ip": "https://whatsmyip.com"
+    "ip": "https://whatsmyip.com",
+    "%3F": "https://google.com/search?q=%s"
 }

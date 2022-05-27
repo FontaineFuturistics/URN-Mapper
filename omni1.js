@@ -8,7 +8,7 @@ const diff_tol = 0.25
 // Create the HTTP server
 http.createServer(function (req, res) {
 
-    // If the request is favicon.ico skip for now
+    // If the request is favicon.ico return the icon
     if (req.url == "/favicon.ico") {
 
         res.write(fs.readFileSync("./favicon.ico")) //TODO: get better icon

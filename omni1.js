@@ -75,7 +75,7 @@ http.createServer(function (req, res) {
 
     } else if (map_url_list[0]) { // If there is a list of options, list them
 
-        // TODO: Write header
+        // Write header
         res.write("<!DOCTYPE html>")
         res.write("Did you mean:\n")
 

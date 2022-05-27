@@ -2,16 +2,8 @@
 let http = require("http");
 let fs = require("fs");
 
-// Import mappings DEPRECATED, using rtJSON function to get real-time mappings
-//let mappings = require("./mappings.json") 
-
-// Get mapping keys
-//let map_keys = Object.keys(mappings)
-
 // Set diff tolerance fraction
 const diff_tol = 0.25
-
-//TODO: I'd like to be able to change mappings dynamically during runtime
 
 // Create the HTTP server
 http.createServer(function (req, res) {
@@ -21,7 +13,7 @@ http.createServer(function (req, res) {
 
         return
 
-    }
+    } // End favicon strip
 
     // Load the mappings
     let mappings = rtJSON("./mappings.json")

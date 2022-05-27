@@ -74,15 +74,23 @@ http.createServer(function (req, res) {
         // return out of void
         return
 
-    } else if (map_url_list[0]) {
+    } else if (map_url_list[0]) { // If there is a list of options, list them
 
-        // TODO: Write the whole list in a pretty format
-        res.write("Did you mean: " + map_url_list)
+        // TODO: Write header
+        res.write("<!DOCTYPE html>")
+        res.write("Did you mean:\n")
+
+        // Write the options as a list
+        for (i = 0; i < map_url_list.length; i++) {
+            res.write("<li><a href=\"" + map_url_list[i] + "\">" + map_url_list[i] + "</a></li>\n")
+        } // End list formatting for loop
+
         res.end()
-        console.log("Gave user " + map_url_list + " options from search " + key)
+        
+        console.log("Gave user " + map_url_list + " options from search " + key) // Log it
         return
 
-    } else {
+    } else { // If no redirect options were found, indicate
 
         // Return failed query
         res.write("Your query has failed, check your spelling")

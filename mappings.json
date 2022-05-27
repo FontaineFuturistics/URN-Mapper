@@ -31,5 +31,10 @@
     "meta": "https://metahuman.unrealengine.com/",
     "mhc": "https://metahuman.unrealengine.com/",
     "ip": "https://whatismyip.com",
-    "%3F": "https://google.com/search?q=%s"
+    "%3F": "https://google.com/search?q=%s",
+    "twitter": "https://twitter.com/",
+    "facebook": "https://facebook.com/",
+    "fb": "https://facebook.com/",
+    "instagram": "https://instagram.com/",
+    "insta": "https://instagram.com/"
 }

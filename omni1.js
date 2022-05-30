@@ -32,7 +32,7 @@ http.createServer(function (req, res) {
 
     let req_str = req.url.split('=', 2)[1] // Split the url on the equals
 
-    let key = req_str.split("+")[0] // Create the key
+    let key = req_str.split("+")[0] // Create the search key
 
     let map_url // Initialize the return url
 

@@ -34,6 +34,10 @@ http.createServer(function (req, res) {
 
     let map_url // Initialize the return url
 
+    // Start the HTML response
+    res.write("<!DOCTYPE html>")
+    res.write("<title>Go! Search</title>")
+
     // Try to do a direct dictionary access
     map_url = mappings[key]
 
@@ -71,7 +75,6 @@ http.createServer(function (req, res) {
     if (map_url == mappings[doc_key]) {
 
         // Create the header
-        res.write("<!DOCTYPE html>\n")
         res.write("All mappings:\n")
 
         // Run against each mapping
@@ -112,8 +115,7 @@ http.createServer(function (req, res) {
 
     } else if (map_url == mappings["json"]) { // If the key is json dump the raw mappings
 
-        res.write("<!DOCTYPE html><title>Go! Search</title>")
-        res.write(fs.readFileSync("./mappings.json").toString('utf8'))
+        res.write(arep(fs.readFileSync("./mappings.json").toString('utf8'), "\n", "</br >"))
         res.end()
         console.log("Showed user json mappings")
         return
@@ -123,8 +125,7 @@ http.createServer(function (req, res) {
     // Return the value
     if (map_url) {
 
-        res.write("<!DOCTYPE html>\n"); // Start an HTML document
-        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + map_url.replace("%s", req_str.split("+", ).slice(1).join("+")) + "\" />"); // Reroute the user
+        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + arep(map_url, "%s", req_str.split("+", ).slice(1).join("+")) + "\" />"); // Reroute the user
         res.end(); // End the response
 
         // Log it in the console
@@ -136,8 +137,6 @@ http.createServer(function (req, res) {
     } else if (map_url_list[0]) { // If there is a list of options, list them
 
         // Write header
-        res.write("<!DOCTYPE html>")
-        res.write("<title>Go! Search</title>")
         res.write("Did you mean:\n")
 
         // Write the options as a list
@@ -153,9 +152,7 @@ http.createServer(function (req, res) {
     } else { // If no redirect options were found, indicate
 
         // Return failed query
-        res.write("<!DOCTYPE html>")
         res.write("Your query has failed, check your spelling or check <a href=\"http://localhost:8080/search?q=docs\">Go docs</a> for mappings") // Change when uploaded to website
-        res.write("<title>Go! Search</title>")
         res.end();
         console.log("Search " + key + " has failed")
         return
@@ -219,6 +216,22 @@ function rtJSON(fp) {
     return output // Return the output
     
 } // rtJSON function
+
+function arep(input, term, substitute) {
+
+    if (term == substitute) {
+        return input // Close out if they are equal
+    }
+
+    while (input.includes(term)) { // Until the term is gone
+
+        input = input.replace(term, substitute) // Replace the first instance of term with substitute
+
+    } // End while loop
+
+    return input // Return
+
+} // End arep function
 
 // Print server status to the console
 console.log("Server Live")

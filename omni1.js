@@ -99,10 +99,17 @@ http.createServer(function (req, res) {
 
             // Write the list item
             res.write("<li><a href=" + cval + ">" + ckey + "</a></li>\n")
-        }
+
+        } 
 
 
         // Finish the response
+        res.end()
+        return
+
+    } else if (map_url == mappings["json"]) { // If the key is json dump the raw mappings
+
+        res.write(fs.readFileSync("./mappings.json").toString('utf8'))
         res.end()
         return
 

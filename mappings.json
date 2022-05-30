@@ -66,12 +66,13 @@
     "bestbuy": "https://www.bestbuy.com/",
     "mcstacker": "https://mcstacker.net/",
     "nuclearcraft": "https://leu-235.com/",
-    "docs": "Go docs for documentation",
+    "docs": "Placeholder for documentation",
     "newegg": "https://newegg.com",
     "ricepuritytest": "http://ricepuritytest.com/",
     "rpt": "http://ricepuritytest.com/",
     "bdsm": "https://bdsmtest.org/select-mode",
     "plancke": "https://plancke.io/hypixel/player/stats/Minecraft",
     "memes": "https://imgflip.com/",
-    "kym": "https://knowyourmeme.com"
+    "kym": "https://knowyourmeme.com",
+    "json": "Placeholder for raw output"
 }

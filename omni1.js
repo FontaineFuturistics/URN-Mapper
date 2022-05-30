@@ -45,6 +45,7 @@ http.createServer(function (req, res) {
     // If that didn't work, move to plan B
     if (map_url == undefined) {
 
+        // Create list to hold all potential mappings
         map_url_list = []
 
         // Run against each key 

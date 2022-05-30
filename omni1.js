@@ -10,7 +10,6 @@ const diff_tol = 0.25
 
 // Set the documentation key
 const doc_key = settings["documentation"]
-const json_key = settings["json"]
 
 // Create the HTTP server
 http.createServer(function (req, res) {

@@ -8,15 +8,13 @@ const diff_tol = 0.25
 // Set the documentation key
 const doc_key = "docs"
 
-// TODO: implement docs with <a> tags
-
 // Create the HTTP server
 http.createServer(function (req, res) {
 
     // If the request is favicon.ico return the icon
     if (req.url == "/favicon.ico") {
 
-        res.write(fs.readFileSync("./favicon.ico")) //TODO: get better icon
+        res.write(fs.readFileSync("./favicon.ico"))
         res.end()
         return
 

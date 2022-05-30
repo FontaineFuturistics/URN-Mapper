@@ -8,5 +8,6 @@
         "json": true,
         "femboy": true
     },
-    "tolerance": 0.25
+    "tolerance": 0.25,
+    "true-search": false
 }

@@ -161,11 +161,24 @@ http.createServer(function (req, res) {
 
         } else { // If no redirect options were found, indicate
 
+            if (!settings["true-search"]) { // If true-search is false inform the user that their query failed
+
             // Return failed query
             res.write("Your query has failed, check your spelling or check <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for mappings") // May need to do somethign special once implemented on serverside to do with the variable port system
             res.end();
             console.log("Search " + key + " has failed")
             return
+
+            } else { // If true-search is true do a google search
+                
+                // Create the redirect tag
+                res.write("<meta http-equiv=\"refresh\" content=\"0; URL=https://google.com/search?q=" + req_str +"\" />"); // Reroute the user
+
+                // End the response
+                res.end()
+                return
+            }
+
 
         } // End output if-else chain
 

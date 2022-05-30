@@ -31,3 +31,13 @@ To add to browser from server host
         Name: Go!
         Keyword: 
         Url: {server}/search?q=%s
+
+Configuration
+    This section refers to the headers in the settings.json file
+    address refers to the address where the mapper is running, this rarely needs to be changed
+    documentation is the urn to display the documentation
+    json is the urn to display the raw json
+    port is the port on which to host the sever
+    hide is a dictionary of all urns to hide from the documentation for easter egg reasons
+    tolerance is the fraction of innacuracy that is allowed for the URN-Mappers corrective algorithm
+    true-search is a boolean which determines whether to do a google search on a failed search

@@ -1,4 +1,4 @@
-// Import http module
+// Import http module for server and fs module to load mappings
 const http = require("http");
 const fs = require("fs");
 

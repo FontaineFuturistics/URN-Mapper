@@ -76,5 +76,7 @@
     "kym": "https://knowyourmeme.com",
     "json": "Placeholder for raw output",
     "femboy": "https://www.youtube.com/watch?v=LeKGaF1jxyo",
-    "clever": "https://clever.com"
+    "clever": "https://clever.com",
+    "isitsafe": "https://www.virustotal.com/gui/search/http%253A%252F%252F%s",
+    "iis": "https://www.virustotal.com/gui/search/http%253A%252F%252F%s"
 }

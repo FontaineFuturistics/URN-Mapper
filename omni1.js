@@ -31,7 +31,7 @@ http.createServer(function (req, res) {
 
     let req_str = req.url.split('=', 2)[1] // Split the url on the equals
 
-    let key = req_str.split("+")[0] // Create the search key
+    let key = req_str.split("+")[0].toLowerCase() // Create the search key
 
     let map_url // Initialize the return url
 
@@ -143,6 +143,10 @@ http.createServer(function (req, res) {
             res.write("<li><a href=\"" + map_url_list[i] + "\">" + map_url_list[i] + "</a></li>\n")
         } // End list formatting for loop
 
+        // Tell useer where to see all mappings
+        res.write("See <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for all mappings")
+
+        // End response
         res.end()
 
         console.log("Gave user " + map_url_list + " options from search " + key) // Log it

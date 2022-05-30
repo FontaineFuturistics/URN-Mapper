@@ -154,7 +154,7 @@ http.createServer(function (req, res) {
     } else { // If no redirect options were found, indicate
 
         // Return failed query
-        res.write("Your query has failed, check your spelling or check <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for mappings") 
+        res.write("Your query has failed, check your spelling or check <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for mappings") // May need to do somethign special once implemented on serverside to do with the variable port system
         res.end();
         console.log("Search " + key + " has failed")
         return

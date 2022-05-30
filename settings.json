@@ -7,5 +7,6 @@
         "docs": true,
         "json": true,
         "femboy": true
-    }
+    },
+    "tolerance": 0.25
 }

@@ -6,7 +6,7 @@ const fs = require("fs");
 const settings = require("./settings.json")
 
 // Set diff tolerance fraction
-const diff_tol = 0.25
+const diff_tol = settings["tolerance"]
 
 // Set the documentation key
 const doc_key = settings["documentation"]

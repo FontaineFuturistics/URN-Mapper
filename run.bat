@@ -1,1 +1,1 @@
-node browsertest.js
+node omni1.js

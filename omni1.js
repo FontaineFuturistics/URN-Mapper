@@ -5,6 +5,9 @@ const fs = require("fs");
 // Set diff tolerance fraction
 const diff_tol = 0.25
 
+// Set the documentation key
+const doc_key = "docs"
+
 // TODO: implement docs with <a> tags
 
 // Create the HTTP server
@@ -63,6 +66,47 @@ http.createServer(function (req, res) {
         } // End map_url_list concatanation if gate
 
     } // End of diff system loop
+
+    // If the map_url is mappings["docs"] display the mappings in custom format
+    if (map_url == mappings[doc_key]) {
+
+        // Create the header
+        res.write("<!DOCTYPE html>\n")
+        res.write("All mappings:\n")
+
+        // Run against each mapping
+        for (i = 0; i < map_keys.length; i++) {
+            // Get the key
+            let ckey = map_keys[i]
+
+            // Skip docs
+            if (ckey == doc_key) {
+                continue
+            }
+
+            // Get the url
+            let cval = mappings[ckey]
+
+            // Replace html characters
+            ckey = ckey.replace("%3F", "?").replace("%2B", "+")
+
+            // If there is a %s, tell the user how to use it
+            if (cval.includes("%s")) {
+
+                ckey += " (Add search term after key to preform searches)"
+
+            }
+
+            // Write the list item
+            res.write("<li><a href=" + cval + ">" + ckey + "</a></li>\n")
+        }
+
+
+        // Finish the response
+        res.end()
+        return
+
+    }
 
     // Return the value
     if (map_url) {

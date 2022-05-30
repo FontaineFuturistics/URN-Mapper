@@ -5,6 +5,8 @@ const fs = require("fs");
 // Set diff tolerance fraction
 const diff_tol = 0.25
 
+// TODO: implement docs with <a> tags
+
 // Create the HTTP server
 http.createServer(function (req, res) {
 

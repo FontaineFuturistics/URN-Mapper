@@ -166,7 +166,13 @@ http.createServer(function (req, res) {
 
         } // End output if-else chain
 
-} catch {console.log("Error caught from " + req.url + " =)")} // Catch any error
+} catch {
+    try { // Try in case the error is really severe
+        console.log("Error caught from " + req.url) // Log it
+        res.write("Oops! An error has occured, try again") // Indicate the error to the user
+        res.end() // End the response
+} catch {console.log("Critical error caught from catch block")} // Log the error, if the console isn't working all hope is lost anyway
+} // Catch any error from the try block
     
 }).listen(settings["port"]);
 

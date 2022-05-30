@@ -1,5 +1,6 @@
 {
     "address": "localhost:8080",
     "documentation": "docs",
-    "json": "json"
+    "json": "json",
+    "port": 8080
 }

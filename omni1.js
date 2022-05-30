@@ -161,7 +161,7 @@ http.createServer(function (req, res) {
 
     } // End output if-else chain
     
-}).listen(8080);
+}).listen(settings["port"]);
 
 // str_diff function to determine the difference between two strings
 function str_diff(base, ref) {
@@ -236,4 +236,4 @@ function arep(input, term, substitute) {
 } // End arep function
 
 // Print server status to the console
-console.log("Server Live")
+console.log("Server Live on port " + settings["port"])

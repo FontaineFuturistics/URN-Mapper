@@ -2,11 +2,15 @@
 const http = require("http");
 const fs = require("fs");
 
+// Load settings
+const settings = require("./settings.json")
+
 // Set diff tolerance fraction
 const diff_tol = 0.25
 
 // Set the documentation key
-const doc_key = "docs"
+const doc_key = settings["documentation"]
+const json_key = settings["json"]
 
 // Create the HTTP server
 http.createServer(function (req, res) {
@@ -83,7 +87,7 @@ http.createServer(function (req, res) {
             // Skip docs
             if (ckey == doc_key) {
                 continue
-            } else if (key == "json") {
+            } else if (key == json_key) {
                 continue
             } // Documentation skip
 
@@ -150,7 +154,7 @@ http.createServer(function (req, res) {
     } else { // If no redirect options were found, indicate
 
         // Return failed query
-        res.write("Your query has failed, check your spelling or check <a href=\"http://localhost:8080/search?q=docs\">Go docs</a> for mappings") // Change when uploaded to website
+        res.write("Your query has failed, check your spelling or check <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for mappings") 
         res.end();
         console.log("Search " + key + " has failed")
         return

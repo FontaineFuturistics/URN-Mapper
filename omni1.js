@@ -14,154 +14,159 @@ const doc_key = settings["documentation"]
 // Create the HTTP server
 http.createServer(function (req, res) {
 
-    // If the request is favicon.ico return the icon
-    if (req.url == "/favicon.ico") {
+    // Try block to prevent server crashes
+    try {
 
-        res.write(fs.readFileSync("./favicon.ico"))
-        res.end()
-        return
+        // If the request is favicon.ico return the icon
+        if (req.url == "/favicon.ico") {
 
-    } // End favicon strip
+            res.write(fs.readFileSync("./favicon.ico"))
+            res.end()
+            return
 
-    // Load the mappings
-    let mappings = rtJSON("./mappings.json")
+        } // End favicon strip
 
-    // Load keys
-    let map_keys = Object.keys(mappings)
+        // Load the mappings
+        let mappings = rtJSON("./mappings.json")
 
-    let req_str = req.url.split('=', 2)[1] // Split the url on the equals
+        // Load keys
+        let map_keys = Object.keys(mappings)
 
-    let key = req_str.split("+")[0].toLowerCase() // Create the search key
+        let req_str = req.url.split('=', 2)[1] // Split the url on the equals
 
-    let map_url // Initialize the return url
+        let key = req_str.split("+")[0].toLowerCase() // Create the search key
 
-    // Start the HTML response
-    res.write("<!DOCTYPE html>")
-    res.write("<title>Go! Search</title>")
+        let map_url // Initialize the return url
 
-    // Try to do a direct dictionary access
-    map_url = mappings[key]
+        // Start the HTML response
+        res.write("<!DOCTYPE html>")
+        res.write("<title>Go! Search</title>")
 
-    // If that didn't work, move to plan B
-    if (map_url == undefined) {
+        // Try to do a direct dictionary access
+        map_url = mappings[key]
 
-        // Create list to hold all potential mappings
-        map_url_list = []
+        // If that didn't work, move to plan B
+        if (map_url == undefined) {
 
-        // Run against each key 
-        for (i = 0; i < map_keys.length; i++) {
+            // Create list to hold all potential mappings
+            map_url_list = []
 
-            // Get current key
-            let ckey = map_keys[i]
+            // Run against each key 
+            for (i = 0; i < map_keys.length; i++) {
 
-            // Calculate maximum allowable difference
-            let max_diff = Math.ceil(diff_tol * ckey.length)
+                // Get current key
+                let ckey = map_keys[i]
 
-            // See if diff is low enough
-            if (str_diff(key, ckey) <= max_diff) {
-                map_url_list.push(mappings[ckey])
-            } // End of output add
+                // Calculate maximum allowable difference
+                let max_diff = Math.ceil(diff_tol * ckey.length)
 
-        } // End of each key loop
+                // See if diff is low enough
+                if (str_diff(key, ckey) <= max_diff) {
+                    map_url_list.push(mappings[ckey])
+                } // End of output add
 
-        // If there is only one option, set map_url to it
-        if (map_url_list.length == 1) {
+            } // End of each key loop
 
-            map_url = map_url_list[0]
+            // If there is only one option, set map_url to it
+            if (map_url_list.length == 1) {
 
-        } // End map_url_list concatanation if gate
+                map_url = map_url_list[0]
 
-    } // End of diff system loop
+            } // End map_url_list concatanation if gate
 
-    // If the map_url is mappings["docs"] display the mappings in custom format
-    if (map_url == mappings[doc_key]) {
+        } // End of diff system loop
 
-        // Create the header
-        res.write("All mappings:\n")
+        // If the map_url is mappings["docs"] display the mappings in custom format
+        if (map_url == mappings[doc_key]) {
 
-        // Run against each mapping
-        for (i = 0; i < map_keys.length; i++) {
-            // Get the key
-            let ckey = map_keys[i]
+            // Create the header
+            res.write("All mappings:\n")
 
-            // Skip docs
-            if (settings["hide"][ckey]) {
-                continue
-            } // Skip hidden mappings
+            // Run against each mapping
+            for (i = 0; i < map_keys.length; i++) {
+                // Get the key
+                let ckey = map_keys[i]
 
-            // Get the url
-            let cval = mappings[ckey]
+                // Skip docs
+                if (settings["hide"][ckey]) {
+                    continue
+                } // Skip hidden mappings
 
-            // Replace html characters
-            ckey = ckey.replace("%3F", "?").replace("%2B", "+")
+                // Get the url
+                let cval = mappings[ckey]
 
-            // If there is a %s, tell the user how to use it
-            if (cval.includes("%s")) {
+                // Replace html characters
+                ckey = ckey.replace("%3F", "?").replace("%2B", "+")
 
-                ckey += " (Add search term after key to preform searches)"
+                // If there is a %s, tell the user how to use it
+                if (cval.includes("%s")) {
 
-            } // %s documentation gate
+                    ckey += " (Add search term after key to preform searches)"
 
-            // Write the list item
-            res.write("<li><a href=" + cval + ">" + ckey + "</a></li>\n")
+                } // %s documentation gate
 
-        } // For loop for all mappings
+                // Write the list item
+                res.write("<li><a href=" + cval + ">" + ckey + "</a></li>\n")
+
+            } // For loop for all mappings
 
 
-        // Finish the response
-        res.end()
-        console.log("Showed user documentation")
-        return
+            // Finish the response
+            res.end()
+            console.log("Showed user documentation")
+            return
 
-    } else if (map_url == mappings["json"]) { // If the key is json dump the raw mappings
+        } else if (map_url == mappings["json"]) { // If the key is json dump the raw mappings
 
-        res.write(arep(fs.readFileSync("./mappings.json").toString('utf8'), "\n", "</br >"))
-        res.end()
-        console.log("Showed user json mappings")
-        return
+            res.write(arep(fs.readFileSync("./mappings.json").toString('utf8'), "\n", "</br >"))
+            res.end()
+            console.log("Showed user json mappings")
+            return
 
-    } // End of documentation if gate
+        } // End of documentation if gate
 
-    // Return the value
-    if (map_url) {
+        // Return the value
+        if (map_url) {
 
-        res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + arep(map_url, "%s", req_str.split("+", ).slice(1).join("+")) + "\" />"); // Reroute the user
-        res.end(); // End the response
+            res.write("<meta http-equiv=\"refresh\" content=\"0; URL=" + arep(map_url, "%s", req_str.split("+", ).slice(1).join("+")) + "\" />"); // Reroute the user
+            res.end(); // End the response
 
-        // Log it in the console
-        console.log("Routed user to " + map_url + " from search " + key);
+            // Log it in the console
+            console.log("Routed user to " + map_url + " from search " + key);
 
-        // return out of void
-        return
+            // return out of void
+            return
 
-    } else if (map_url_list[0]) { // If there is a list of options, list them
+        } else if (map_url_list[0]) { // If there is a list of options, list them
 
-        // Write header
-        res.write("Did you mean:\n")
+            // Write header
+            res.write("Did you mean:\n")
 
-        // Write the options as a list
-        for (i = 0; i < map_url_list.length; i++) {
-            res.write("<li><a href=\"" + map_url_list[i] + "\">" + map_url_list[i] + "</a></li>\n")
-        } // End list formatting for loop
+            // Write the options as a list
+            for (i = 0; i < map_url_list.length; i++) {
+                res.write("<li><a href=\"" + map_url_list[i] + "\">" + map_url_list[i] + "</a></li>\n")
+            } // End list formatting for loop
 
-        // Tell useer where to see all mappings
-        res.write("See <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for all mappings")
+            // Tell useer where to see all mappings
+            res.write("See <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for all mappings")
 
-        // End response
-        res.end()
+            // End response
+            res.end()
 
-        console.log("Gave user " + map_url_list + " options from search " + key) // Log it
-        return
+            console.log("Gave user " + map_url_list + " options from search " + key) // Log it
+            return
 
-    } else { // If no redirect options were found, indicate
+        } else { // If no redirect options were found, indicate
 
-        // Return failed query
-        res.write("Your query has failed, check your spelling or check <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for mappings") // May need to do somethign special once implemented on serverside to do with the variable port system
-        res.end();
-        console.log("Search " + key + " has failed")
-        return
+            // Return failed query
+            res.write("Your query has failed, check your spelling or check <a href=\"http://" + settings["address"] + "/search?q=docs\">Go docs</a> for mappings") // May need to do somethign special once implemented on serverside to do with the variable port system
+            res.end();
+            console.log("Search " + key + " has failed")
+            return
 
-    } // End output if-else chain
+        } // End output if-else chain
+
+} catch {console.log("Error caught from " + req.url + " =)")} // Catch any error
     
 }).listen(settings["port"]);
 

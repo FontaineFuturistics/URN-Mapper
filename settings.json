@@ -2,5 +2,10 @@
     "address": "localhost:8080",
     "documentation": "docs",
     "json": "json",
-    "port": 8080
+    "port": 8080,
+    "hide": {
+        "docs": true,
+        "json": true,
+        "femboy": true
+    }
 }

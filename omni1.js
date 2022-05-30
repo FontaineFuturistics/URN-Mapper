@@ -85,11 +85,9 @@ http.createServer(function (req, res) {
             let ckey = map_keys[i]
 
             // Skip docs
-            if (ckey == doc_key) {
+            if (settings["hide"][ckey]) {
                 continue
-            } else if (key == json_key) {
-                continue
-            } // Documentation skip
+            } // Skip hidden mappings
 
             // Get the url
             let cval = mappings[ckey]

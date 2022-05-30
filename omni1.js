@@ -82,7 +82,9 @@ http.createServer(function (req, res) {
             // Skip docs
             if (ckey == doc_key) {
                 continue
-            }
+            } else if (key == "json") {
+                continue
+            } // Documentation skip
 
             // Get the url
             let cval = mappings[ckey]
@@ -95,12 +97,12 @@ http.createServer(function (req, res) {
 
                 ckey += " (Add search term after key to preform searches)"
 
-            }
+            } // %s documentation gate
 
             // Write the list item
             res.write("<li><a href=" + cval + ">" + ckey + "</a></li>\n")
 
-        } 
+        } // For loop for all mappings
 
 
         // Finish the response
@@ -115,7 +117,7 @@ http.createServer(function (req, res) {
         console.log("Showed user json mappings")
         return
 
-    }
+    } // End of documentation if gate
 
     // Return the value
     if (map_url) {

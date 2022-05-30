@@ -112,6 +112,7 @@ http.createServer(function (req, res) {
 
     } else if (map_url == mappings["json"]) { // If the key is json dump the raw mappings
 
+        res.write("<!DOCTYPE html><title>Go! Search</title>")
         res.write(fs.readFileSync("./mappings.json").toString('utf8'))
         res.end()
         console.log("Showed user json mappings")
@@ -136,6 +137,7 @@ http.createServer(function (req, res) {
 
         // Write header
         res.write("<!DOCTYPE html>")
+        res.write("<title>Go! Search</title>")
         res.write("Did you mean:\n")
 
         // Write the options as a list
@@ -151,7 +153,9 @@ http.createServer(function (req, res) {
     } else { // If no redirect options were found, indicate
 
         // Return failed query
-        res.write("Your query has failed, check your spelling or check Go docs for mappings")
+        res.write("<!DOCTYPE html>")
+        res.write("Your query has failed, check your spelling or check <a href=\"http://localhost:8080/search?q=docs\">Go docs</a> for mappings") // Change when uploaded to website
+        res.write("<title>Go! Search</title>")
         res.end();
         console.log("Search " + key + " has failed")
         return

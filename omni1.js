@@ -67,6 +67,9 @@ http.createServer(function (req, res) {
 
             } // End of each key loop
 
+            // Remove duplicate results
+            map_url_list = removeDuplicates(map_url_list)
+
             // If there is only one option, set map_url to it
             if (map_url_list.length == 1) {
 
@@ -166,13 +169,13 @@ http.createServer(function (req, res) {
 
         } // End output if-else chain
 
-} catch {
-    try { // Try in case the error is really severe
-        console.log("Error caught from " + req.url) // Log it
-        res.write("Oops! An error has occured, try again") // Indicate the error to the user
-        res.end() // End the response
-} catch {console.log("Critical error caught from catch block")} // Log the error, if the console isn't working all hope is lost anyway
-} // Catch any error from the try block
+    } catch {
+        try { // Try in case the error is really severe
+            console.log("Error caught from " + req.url) // Log it
+            res.write("Oops! An error has occured, try again") // Indicate the error to the user
+            res.end() // End the response
+        } catch {console.log("Critical error caught from catch block")} // Log the error, if the console isn't working all hope is lost anyway
+    } // Catch any error from the try block
     
 }).listen(settings["port"]);
 
@@ -247,6 +250,26 @@ function arep(input, term, substitute) {
     return input // Return
 
 } // End arep function
+
+function removeDuplicates (array) {
+    // Create variable for the output array
+    let output = []
+
+    // For each value in array, if it is unique add it to output
+    for (i = 0; i < array.length; i++) {
+
+        // If the value is not found
+        if (!output.includes(array[i])) {
+
+            output.push(array[i]) // Add it to the output
+
+        } // End of if gate
+
+    } // End of each value for loop
+
+    return output // Return the output
+
+} // End of removeDuplicates function
 
 // Print server status to the console
 console.log("Server Live on port " + settings["port"])

@@ -24,6 +24,15 @@ To Setup on Local Machine
                 Name: Go!
                 Keyword: go
                 Url: localhost:8080/search?q=%s
+	For FireFox
+		FireFox is dumb
+		Go to localhost:8080/search?q=docs
+		Click on the address bar
+		Where there is a black circle that says "Go!" in the middle with a green plus, click it
+		Go to the cog to the right
+		Scroll down to the bottom of that settings panel
+		Double click on the keyword column for Go! Search
+		set the keyword to go
 
 To add to browser from server host
     Go to add new search engine

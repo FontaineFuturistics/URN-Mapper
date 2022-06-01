@@ -26,6 +26,16 @@ http.createServer(function (req, res) {
 
         } // End favicon strip
 
+        // If the request is opensearch.xml for FireFox, return it
+        if (req.url == "/opensearch.xml") {
+
+            res.write(fs.readFileSync("./opensearch.xml"))
+            res.end()
+            console.log("Responded to opensearch.xml query")
+            return
+
+        } // End favicon strip
+
         // Load the mappings
         let mappings = rtJSON("./mappings.json")
 
@@ -41,6 +51,7 @@ http.createServer(function (req, res) {
         // Start the HTML response
         res.write("<!DOCTYPE html>")
         res.write("<title>Go! Search</title>")
+        res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="/opensearch.xml"></head>') // Do this to make FireFox work
 
         // Try to do a direct dictionary access
         map_url = mappings[key]

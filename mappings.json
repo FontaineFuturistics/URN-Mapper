@@ -81,5 +81,6 @@
     "iis": "https://www.virustotal.com/gui/search/http%253A%252F%252F%s",
     "artemis": "https://www.artemisspaceshipbridge.com/#/",
     "radmin": "https://www.radmin-vpn.com/",
-    "stackoverflow": "https://stackoverflow.com/"
+    "stackoverflow": "https://stackoverflow.com/",
+    "nodejs": "https://nodejs.org"
 }

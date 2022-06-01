@@ -9,6 +9,7 @@ To install the URN mapper as a search emgine in your browser see below instructi
 
 To Setup on Local Machine
     Download from github
+    Install Nodejs from https://nodejs.org/en/
     Change "address" in settings.json to localhost:8080
     Configure started folder
         Put a shortcut to run.bat in %AppData%\Microsoft\Windows\Start Menu\Programs\Startup

@@ -51,7 +51,7 @@ http.createServer(function (req, res) {
         // Start the HTML response
         res.write("<!DOCTYPE html>")
         res.write("<title>Go! Search</title>")
-        res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="/opensearch.xml"></head>') // Do this to make FireFox work
+        res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Go! Search" href="/opensearch.xml"></head>') // Do this to make FireFox work
 
         // Try to do a direct dictionary access
         map_url = mappings[key]

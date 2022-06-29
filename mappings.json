@@ -93,5 +93,6 @@
     "vscode": "https://marketplace.visualstudio.com/VSCode",
     "crayon": "https://www.craiyon.com/",
     "gpt3": "https://app.inferkit.com/demo",
-    "dnd": "https://play.aidungeon.io/main/home"
+    "dnd": "https://play.aidungeon.io/main/home",
+    "culture": "https://www.urbandictionary.com/define.php?term=%s"
 }

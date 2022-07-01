@@ -7,6 +7,7 @@
     "mcdaniel": "https://www.mcdaniel.edu/",
     "steamcharts": "https://steamcharts.com/",
     "dcjs": "https://discord.js.org/#/docs/discord.js/stable/general/welcome",
+    "discordjs": "https://discord.js.org/#/docs/discord.js/stable/general/welcome",
     "help": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "google": "https://google.com",
     "translate": "https://translate.google.com/",
@@ -94,5 +95,12 @@
     "crayon": "https://www.craiyon.com/",
     "gpt3": "https://app.inferkit.com/demo",
     "dnd": "https://play.aidungeon.io/main/home",
-    "culture": "https://www.urbandictionary.com/define.php?term=%s"
+    "culture": "https://www.urbandictionary.com/define.php?term=%s",
+    "cava": "https://cava.com/",
+    "squisito": "https://squisitopizzaandpasta.com/",
+    "oxford": "https://www.lexico.com/",
+    "mirriam": "https://www.merriam-webster.com/",
+    "define": "https://www.lexico.com/en/definition/%s",
+    "merica": "https://www.merriam-webster.com/dictionary/%s",
+    "kyms": "https://knowyourmeme.com/search?q=%s"
 }

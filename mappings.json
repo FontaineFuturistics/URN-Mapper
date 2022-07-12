@@ -102,5 +102,11 @@
     "mirriam": "https://www.merriam-webster.com/",
     "define": "https://www.lexico.com/en/definition/%s",
     "merica": "https://www.merriam-webster.com/dictionary/%s",
-    "kyms": "https://knowyourmeme.com/search?q=%s"
+    "kyms": "https://knowyourmeme.com/search?q=%s",
+    "router": "http://192.168.50.1",
+    "image": "https://tineye.com/",
+    "is": "https://tineye.com/search/%s",
+    "wapo": "https://www.washingtonpost.com/",
+    "mcdcal": "https://www.mcdaniel.edu/student-life/housing/residence-life-opening-closing-calendar",
+    "mcdcalverbose": "https://www.mcdaniel.edu/about-us/event-calendars/academic-calendars"
 }

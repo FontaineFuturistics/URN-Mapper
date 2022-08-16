@@ -108,5 +108,8 @@
     "is": "https://tineye.com/search/%s",
     "wapo": "https://www.washingtonpost.com/",
     "mcdcal": "https://www.mcdaniel.edu/student-life/housing/residence-life-opening-closing-calendar",
-    "mcdcalverbose": "https://www.mcdaniel.edu/about-us/event-calendars/academic-calendars"
+    "mcdcalverbose": "https://www.mcdaniel.edu/about-us/event-calendars/academic-calendars",
+    "extract": "https://www.imagetotext.info/",
+    "mmd": "https://my.mcdaniel.edu/student/Pages/default.aspx",
+    "mdbb": "https://bb.mcdaniel.edu/"
 }

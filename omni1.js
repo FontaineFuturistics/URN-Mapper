@@ -36,6 +36,13 @@ http.createServer(function (req, res) {
 
         } // End favicon strip
 
+        // Get the users IP
+        let userIP = req.socket.remoteAddress
+
+        if (userIP === "::1") {
+            userIP = "localhost"
+        }
+
         // Load the mappings
         let mappings = rtJSON("./mappings.json")
 
@@ -127,14 +134,14 @@ http.createServer(function (req, res) {
 
             // Finish the response
             res.end()
-            console.log("Showed user documentation")
+            console.log("Showed user " + userIP + " documentation")
             return
 
         } else if (map_url == mappings["json"]) { // If the key is json dump the raw mappings
 
             res.write(arep(fs.readFileSync("./mappings.json").toString('utf8'), "\n", "</br >"))
             res.end()
-            console.log("Showed user json mappings")
+            console.log("Showed user " + userIP + " json mappings")
             return
 
         } // End of documentation if gate
@@ -146,7 +153,7 @@ http.createServer(function (req, res) {
             res.end(); // End the response
 
             // Log it in the console
-            console.log("Routed user to " + map_url + " from search " + key);
+            console.log("Routed user " + userIP + " to " + map_url + " from search " + key);
 
             // return out of void
             return
@@ -167,7 +174,7 @@ http.createServer(function (req, res) {
             // End response
             res.end()
 
-            console.log("Gave user " + map_url_list + " options from search " + key) // Log it
+            console.log("Gave user " + userIP + " " + map_url_list + " options from search " + key) // Log it
             return
 
         } else { // If no redirect options were found, indicate

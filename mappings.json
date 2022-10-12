@@ -126,5 +126,7 @@
     "mift": "http://myinstafacetok.com/",
     "mdwp": "https://blog.mcdaniel.edu/exploringliteracies/wp-login.php",
     "mdlib": "https://lib.hoover.mcdaniel.edu/home",
-    "gforms": "https://docs.google.com/forms/u/0/?tgif=d"
+    "gforms": "https://docs.google.com/forms/u/0/?tgif=d",
+    "mtg": "https://gatherer.wizards.com/Pages/Advanced.aspx",
+    "mtgai": "https://www.urzas.ai/"
 }

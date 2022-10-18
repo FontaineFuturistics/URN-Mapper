@@ -128,5 +128,9 @@
     "mdlib": "https://lib.hoover.mcdaniel.edu/home",
     "gforms": "https://docs.google.com/forms/u/0/?tgif=d",
     "mtg": "https://gatherer.wizards.com/Pages/Advanced.aspx",
-    "mtgai": "https://www.urzas.ai/"
+    "mtgai": "https://www.urzas.ai/",
+    "scholar": "https://scholar.google.com/",
+    "mbfs": "https://mediabiasfactcheck.com/",
+    "bias": "https://mediabiasfactcheck.com/?s=%s",
+    "xplore": "https://ieeexplore.ieee.org/Xplore/home.jsp"
 }

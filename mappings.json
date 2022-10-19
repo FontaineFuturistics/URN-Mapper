@@ -132,5 +132,7 @@
     "scholar": "https://scholar.google.com/",
     "mbfs": "https://mediabiasfactcheck.com/",
     "bias": "https://mediabiasfactcheck.com/?s=%s",
-    "xplore": "https://ieeexplore.ieee.org/Xplore/home.jsp"
+    "xplore": "https://ieeexplore.ieee.org/Xplore/home.jsp",
+    "ap": "https://apnews.com/",
+    "mdcat": "https://catalog.mcdaniel.edu/"
 }

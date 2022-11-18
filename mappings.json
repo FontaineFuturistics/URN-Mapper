@@ -134,5 +134,7 @@
     "bias": "https://mediabiasfactcheck.com/?s=%s",
     "xplore": "https://ieeexplore.ieee.org/Xplore/home.jsp",
     "ap": "https://apnews.com/",
-    "mdcat": "https://catalog.mcdaniel.edu/"
+    "mdcat": "https://catalog.mcdaniel.edu/",
+    "nyt": "https://www.nytimes.com/",
+    "blob": "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en"
 }

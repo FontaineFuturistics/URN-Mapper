@@ -137,5 +137,6 @@
     "mdcat": "https://catalog.mcdaniel.edu/",
     "nyt": "https://www.nytimes.com/",
     "blob": "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en",
-    "mdss": "https://selfservice.campus.mcdaniel.edu:8173/Student/?hideProxyDialog=false"
+    "mdss": "https://selfservice.campus.mcdaniel.edu:8173/Student/?hideProxyDialog=false",
+    "walmart": "https://www.walmart.com/"
 }

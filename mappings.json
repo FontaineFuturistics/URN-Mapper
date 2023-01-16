@@ -136,5 +136,6 @@
     "ap": "https://apnews.com/",
     "mdcat": "https://catalog.mcdaniel.edu/",
     "nyt": "https://www.nytimes.com/",
-    "blob": "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en"
+    "blob": "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en",
+    "mdss": "https://selfservice.campus.mcdaniel.edu:8173/Student/?hideProxyDialog=false"
 }

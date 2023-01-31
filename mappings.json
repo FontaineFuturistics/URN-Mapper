@@ -138,5 +138,7 @@
     "nyt": "https://www.nytimes.com/",
     "blob": "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw?hl=en",
     "mdss": "https://selfservice.campus.mcdaniel.edu:8173/Student/?hideProxyDialog=false",
-    "walmart": "https://www.walmart.com/"
+    "walmart": "https://www.walmart.com/",
+    "oai": "https://open.ai/images",
+    "chatgpt": "https://chat.openai.com"
 }

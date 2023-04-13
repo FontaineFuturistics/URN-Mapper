@@ -142,5 +142,6 @@
     "oai": "https://open.ai/images",
     "chatgpt": "https://chat.openai.com",
     "alpha": "https://www.wolframalpha.com/",
-    "quizlet": "https://quizlet.com/latest"
+    "quizlet": "https://quizlet.com/latest",
+    "phikap": "https://login.phikapconnect.org/"
 }

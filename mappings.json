@@ -143,5 +143,8 @@
     "chatgpt": "https://chat.openai.com",
     "alpha": "https://www.wolframalpha.com/",
     "quizlet": "https://quizlet.com/latest",
-    "phikap": "https://login.phikapconnect.org/"
+    "phikap": "https://login.phikapconnect.org/",
+    "bimg": "https://www.bing.com/images/create?",
+    "bchat": "https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx",
+    "bhome": "https://www.bing.com/?scope=web&cc=US&FORM=ANNTH1"
 }

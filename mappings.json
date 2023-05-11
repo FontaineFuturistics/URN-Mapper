@@ -147,5 +147,7 @@
     "bimg": "https://www.bing.com/images/create?",
     "bchat": "https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx",
     "bhome": "https://www.bing.com/?scope=web&cc=US&FORM=ANNTH1",
-    "linkedin": "https://www.linkedin.com/"
+    "linkedin": "https://www.linkedin.com/",
+    "uls": "https://wireless2.fcc.gov/UlsApp/ApplicationSearch/searchAppl.jsp",
+    "gai": "https://aitestkitchen.withgoogle.com/"
 }

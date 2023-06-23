@@ -1,0 +1,16 @@
+{
+  "name": "electrontutorial",
+  "version": "1.0.0",
+  "description": "Just a test",
+  "main": "main.js",
+  "scripts": {
+    "test": "",
+    "start": "electron ."
+  },
+  "author": "Markus Rune",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.2.1",
+    "electron": "^25.2.0"
+  }
+}

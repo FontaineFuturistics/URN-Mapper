@@ -1,0 +1,23 @@
+{
+  "name": "urn-mapper",
+  "version": "2.0.0",
+  "description": "URN-mapper remastered in Electron",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FontaineFuturistics/urn-mapper.git"
+  },
+  "author": "Markus Rune",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FontaineFuturistics/urn-mapper/issues"
+  },
+  "homepage": "https://github.com/FontaineFuturistics/urn-mapper#readme",
+  "devDependencies": {
+    "electron": "^25.2.0"
+  }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <!--Because otherwise electron whines-->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+
+    <!--Style Sheet Reference-->
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>URN-Mapper</title>
+
+</head>
+
+<body>
+
+<div id="terminal" class="scrollDiv">Welcome to the URN-Mapper!</div>
+
+</body>
+
+<script src="./renderer.js"></script>
+
+</html>

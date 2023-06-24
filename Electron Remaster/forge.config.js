@@ -1,7 +1,8 @@
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: "./webicon"
+    icon: "./webicon",
+    name: "Fancy Fox"
   },
   rebuildConfig: {},
   makers: [

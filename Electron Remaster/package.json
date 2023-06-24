@@ -1,5 +1,5 @@
 {
-  "name": "URN Mapper",
+  "name": "urn-mapper",
   "version": "2.0.1",
   "description": "URN-mapper remastered in Electron",
   "main": "main.js",

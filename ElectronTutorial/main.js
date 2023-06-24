@@ -1,6 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron') // Import electron
 const path = require('path') // import path to preload
 
+// Handle install
+if (require('electron-squirrel-startup')) return;
+
 // Constructor for BrowserWindow
 const createWindow = () => {
     const win = new BrowserWindow({

@@ -127,7 +127,7 @@ http.createServer(function (req, res) {
         let mappings = require("./mappings.json")
 
         // Extract all the keys for matching later
-        let map_keys = Object.keys(mappings)
+        let map_keys = Object.keys(mappings).sort()
 
         // Extract the search term from the URL
         let search = req.url.split("search?q=")[1].toLowerCase().split("+") // All searches are done in lower case
@@ -198,7 +198,7 @@ http.createServer(function (req, res) {
                 if (settings["hide"][ckey]) continue // This is for easter eggs primarily
 
                 // Create the docs entry
-                res.write(`<li><a href="${mappings[ckey]}">${ckey}${mappings[ckey].includes("%s") ? "Add search term after key to preform searches" : ""}</a></li>`)
+                res.write(`<li><a href="${mappings[ckey]}">${ckey.replace("%3f", "?").replace("%2b","+")}${mappings[ckey].includes("%s") ? " Add search term after key to preform searches" : ""}</a></li>`)
 
             }
 

@@ -27,7 +27,6 @@ const createWindow = () => {
         width: 700,
         height: 400,
         icon: path.join(__dirname, 'webicon.ico'),
-        minimizable: false,
         maximiziable: false,
         resizable: false,
         titleBarStyle: 'hidden',

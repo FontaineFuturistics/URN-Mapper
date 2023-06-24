@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron') // Import electron
 const path = require('path') // import path to preload
+const AutoLaunch = require('auto-launch'); // To make app run on startup
 
 // Handle install
 if (require('electron-squirrel-startup')) return;
@@ -35,6 +36,17 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
+
+    // Configure auto-launch here for some reason
+    let autolaunch = new AutoLaunch({ // Create an autolaunch object
+        name: 'ElectronTutorialTest',
+        path: app.getPath('exe'),
+    });
+    autolaunch.isEnabled().then((isEnabled) => { // Check if it is enabled?
+        if (!isEnabled) autolaunch.enable(); // If it is not enabled, enable it
+    })
+
+
     ipcMain.handle('ping', () => 'pong') // We set up the handler before creating the window
     createWindow()
 

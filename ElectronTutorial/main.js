@@ -5,9 +5,12 @@ const AutoLaunch = require('auto-launch'); // To make app run on startup
 // Handle install
 if (require('electron-squirrel-startup')) return;
 
+// Declare the window here because this code is bad
+let win
+
 // Constructor for BrowserWindow
 const createWindow = () => {
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: { // Attach the preload script
@@ -15,8 +18,10 @@ const createWindow = () => {
         }
     })
 
+    // Load the html file
     win.loadFile('index.html')
 
+    // Do the funny thing in the task bar
     const INCREMENT = 0.01
     const INTERVAL_DELAY = 50 // ms
 
@@ -33,8 +38,12 @@ const createWindow = () => {
             c = 0.1
         }
     }, INTERVAL_DELAY)
+
+    // Send a message to the renderer from main
+    win.webContents.send('orders', 1) // Doesn't work
 }
 
+// When the app is ready to launch
 app.whenReady().then(() => {
 
     // Configure auto-launch here for some reason
@@ -46,10 +55,19 @@ app.whenReady().then(() => {
         if (!isEnabled) autolaunch.enable(); // If it is not enabled, enable it
     })
 
-
+    // ipc tutorial
     ipcMain.handle('ping', () => 'pong') // We set up the handler before creating the window
+
+    // Repond to the bugging
+    ipcMain.handle('bugMain', () => {
+        console.log("Bugging received")
+        win.webContents.send('orders', "Your orders are to fly")
+    })
+
+    // Make the window visible
     createWindow()
 
+    // Make it play nice on apple
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
@@ -60,6 +78,7 @@ app.on('before-quit', () => {
     clearInterval(progressInterval)
 })
 
+// Make the app close (and play nice on apple)
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
       app.quit()

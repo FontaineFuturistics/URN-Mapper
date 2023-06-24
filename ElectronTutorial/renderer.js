@@ -8,4 +8,20 @@ const func = async () => {
     // This doesn't work because the renderer does not have access to the console
 }
 
+console.log("test1")
+
 func()
+func()
+
+// Handle orders from main
+const box = document.getElementById("msgBox")
+
+window.versions.onOrders((_event, value) => {
+    console.log("test2")
+    box.innerText = value
+})
+
+console.log("test3")
+
+// Bug main
+window.versions.bugMain()

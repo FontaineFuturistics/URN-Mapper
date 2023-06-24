@@ -2,6 +2,7 @@
     height: 300px;
     width: 550px;
     overflow-y: auto;
+    -webkit-app-region: no-drag;
 }
 
 .drag{

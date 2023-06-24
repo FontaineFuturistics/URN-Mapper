@@ -2,6 +2,10 @@ const {app, BrowswerWindow, BrowserWindow, Tray, Menu, nativeImage } = require('
 const http = require("http") // Import http module for http server
 const fs = require('fs') // Import file system to handle favicon among other things
 const path = require('path') // Import path for preload
+const AutoLaunch = require('auto-launch') // To make app run on startup
+
+// Handle install
+if (require('electron-squirrel-startup')) return;
 
 // Variable for main window
 let mainWindow
@@ -13,7 +17,7 @@ let tray
 let terminalContents = ["Welcome to the URN-Mapper!"]
 
 // Icon
-const foxIcon = nativeImage.createFromPath(path.join(__dirname, 'webicon.ico'))
+const foxIcon_path = path.join(__dirname, 'webicon.ico')
 
 // createWindow method
 const createWindow = () => {
@@ -22,7 +26,7 @@ const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 700,
         height: 400,
-        icon: foxIcon,
+        icon: path.join(__dirname, 'webicon.ico'),
         minimizable: false,
         maximiziable: false,
         resizable: false,
@@ -37,7 +41,6 @@ const createWindow = () => {
     mainWindow.loadFile('index.html')
 
     mainWindow.on('close', (e) => {
-        console.log("Unload intercepted")
         e.preventDefault()
         mainWindow.hide()
     })
@@ -47,11 +50,21 @@ const createWindow = () => {
 // When the app is ready load the window
 app.whenReady().then(() => {
 
+    // Configure auto-launch
+    // Configure auto-launch here for some reason
+    let autolaunch = new AutoLaunch({ // Create an autolaunch object
+        name: 'ElectronTutorialTest',
+        path: app.getPath('exe'),
+    });
+    autolaunch.isEnabled().then((isEnabled) => { // Check if it is enabled?
+        if (!isEnabled) autolaunch.enable(); // If it is not enabled, enable it
+    })
+
     // Create the window
     createWindow()
     
     // Configure the tray
-    tray = new Tray(foxIcon)
+    tray = new Tray(nativeImage.createFromPath(foxIcon_path))
 
     // Create a menu for the tray
     const contextMenu = Menu.buildFromTemplate([
@@ -98,7 +111,7 @@ http.createServer(function (req, res) {
         if (req.url == "/favicon.ico") { // Server icon request
             
             // Respond with the webicon (to differentiate from electron's favicon)
-            res.write(fs.readFileSync("./webicon.ico"))
+            res.write(fs.readFileSync(path.join(__dirname, 'webicon.ico')))
             res.end()
             return
 

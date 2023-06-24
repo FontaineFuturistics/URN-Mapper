@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('versions', {
     electron: () => process.versions.electron,
     ping: () => ipcRenderer.invoke('ping'),
     onOrders: (msgFromMain) => ipcRenderer.on('orders', msgFromMain),
+    onListWrite: (msgFromMain) => ipcRenderer.on('writeList', msgFromMain),
     bugMain: () => ipcRenderer.invoke('bugMain'),
     // We can also expose variables, not just functions
 })

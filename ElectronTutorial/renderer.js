@@ -23,5 +23,13 @@ window.versions.onOrders((_event, value) => {
 
 console.log("test3")
 
+// Handle writes to the list Container from main
+const liCon = document.getElementById("listContainer")
+
+window.versions.onListWrite((_event, value) => {
+    console.log("List write received for " + value)
+    liCon.innerHTML += `<li>${value}</li>\n` // IMPORTANT: Use innterHTML not innerText if you want it parsed as HTML
+})
+
 // Bug main
 window.versions.bugMain()

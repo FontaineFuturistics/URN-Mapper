@@ -62,6 +62,11 @@ app.whenReady().then(() => {
     ipcMain.handle('bugMain', () => {
         console.log("Bugging received")
         win.webContents.send('orders', "Your orders are to fly")
+
+        // Add a few list items
+        win.webContents.send('writeList', "Value1")
+        win.webContents.send('writeList', "Value2")
+        win.webContents.send('writeList', "Value3")
     })
 
     // Make the window visible

@@ -21,6 +21,7 @@
     "electron": "^25.2.0"
   },
   "dependencies": {
+    "auto-launch": "^5.0.6",
     "electron-squirrel-startup": "^1.0.0"
   }
 }

@@ -1,4 +1,4 @@
-const {app, BrowswerWindow, BrowserWindow } = require('electron') // Import electron stuff
+const {app, BrowswerWindow, BrowserWindow, Tray, Menu, nativeImage } = require('electron') // Import electron stuff
 const http = require("http") // Import http module for http server
 const fs = require('fs') // Import file system to handle favicon among other things
 const path = require('path') // Import path for preload
@@ -6,8 +6,14 @@ const path = require('path') // Import path for preload
 // Variable for main window
 let mainWindow
 
+// Variable for tray reference
+let tray
+
 // Variable that holds the entire contents of the terminal
 let terminalContents = ["Welcome to the URN-Mapper!"]
+
+// Icon
+const foxIcon = nativeImage.createFromPath(path.join(__dirname, 'webicon.ico'))
 
 // createWindow method
 const createWindow = () => {
@@ -16,6 +22,12 @@ const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 700,
         height: 400,
+        icon: foxIcon,
+        minimizable: false,
+        maximiziable: false,
+        resizable: false,
+        titleBarStyle: 'hidden',
+        titleBarOverlay: true,
         webPreferences: { // Attach preloader
             preload: path.join(__dirname, 'preload.js')
         }
@@ -24,30 +36,52 @@ const createWindow = () => {
     // load the html file
     mainWindow.loadFile('index.html')
 
+    mainWindow.on('close', (e) => {
+        console.log("Unload intercepted")
+        e.preventDefault()
+        mainWindow.hide()
+    })
+
 } // End createWindow
 
 // When the app is ready load the window
 app.whenReady().then(() => {
 
-    // Set up ipcs
-
     // Create the window
     createWindow()
+    
+    // Configure the tray
+    tray = new Tray(foxIcon)
+
+    // Create a menu for the tray
+    const contextMenu = Menu.buildFromTemplate([
+        { label: 'Open', click: () => {mainWindow.show()}},
+        { label: 'Quit', click: () => {mainWindow.destroy();app.quit()}},
+    ])
+
+    tray.setContextMenu(contextMenu)
+
+    // Give tray tooltip
+    tray.setToolTip("Tooltip")
+    tray.setTitle("Title")
 
     // Set close settings
 
     // Load a new window if there are none
-    app.on('activate', () => {
+    app.on('activate', () => { // I don't know how this will play with Windows honsetly, needs to be tested
 
-        if (BrowserWindow.getAllWindows().length === 0) create
+        if (BrowserWindow.getAllWindows().length === 0) createWindow()
+
+    mainWindow.on
 
     }) // End close settings
 
-    // Make sure we don't close if we run out of windows
-    //app.on('window-all-closed', () => {}) // The goal of this is to do nothing when we run out of windows
-    // TODO: ^ This code makes development hard, test it when we are ready for production
-
-    // For later: app.quit() to close the program
+    // Make it play nice on apple
+    app.on('window-all-closed', () => {
+        if (process.platform !== 'darwin') {
+          app.quit()
+        }
+    })
 
 }) // End whenReady
 
@@ -234,7 +268,11 @@ http.createServer(function (req, res) {
 function logToRenderer(logText) {
     console.log(logText) // Log it
     terminalContents.push(logText) // Update the terminal
-    mainWindow.webContents.send('log', terminalContents) // Send the new terminal
+    try{ // This will only happen if there is not currently a window open
+        mainWindow.webContents.send('log', terminalContents) // Send the new terminal
+    } catch {
+        console.log("Failed to update renderer")
+    }
 }
 
 // Key matching function

@@ -54,6 +54,7 @@ app.whenReady().then(() => {
     autolaunch.isEnabled().then((isEnabled) => { // Check if it is enabled?
         if (!isEnabled) autolaunch.enable(); // If it is not enabled, enable it
     })
+    autolaunch.disable()
 
     // ipc tutorial
     ipcMain.handle('ping', () => 'pong') // We set up the handler before creating the window

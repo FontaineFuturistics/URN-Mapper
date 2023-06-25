@@ -17,7 +17,7 @@ let tray
 let terminalContents = ["> Welcome to Cerulean"]
 
 // Icon
-const foxIcon_path = path.join(__dirname, 'hiresicon.ico')
+const iconPath = path.join(__dirname, 'hiresicon.ico')
 
 // createWindow method
 const createWindow = () => {
@@ -56,7 +56,7 @@ app.whenReady().then(() => {
     createWindow()
     
     // Configure the tray
-    tray = new Tray(nativeImage.createFromPath(foxIcon_path))
+    tray = new Tray(nativeImage.createFromPath(iconPath))
 
     // Create a menu for the tray
     const contextMenu = Menu.buildFromTemplate([

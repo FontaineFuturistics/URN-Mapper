@@ -19,6 +19,37 @@ let terminalContents = ["> Welcome to Cerulean"]
 // Icon
 const iconPath = path.join(__dirname, 'hiresicon.ico')
 
+// Load settings
+// Make settings global
+let settings
+
+// Get path to settings
+settingsPath = path.join(app.getPath("userData"), "settings.json")
+
+// Read settings file into a variable
+//settings = JSON.parse(fs.readFileSync(settingsPath, {encoding: 'utf-8'}))
+
+try {
+    // Try to load the settings from userData
+    settings = JSON.parse(fs.readFileSync(settingsPath, {encoding: 'utf-8'}))
+
+} catch {
+
+    // If it doesn't work, create the settings first
+    fs.writeFileSync(path.join(app.getPath("userData"), "settings.json"), JSON.stringify(require(path.join(__dirname, "settings.json"))))
+
+    try {
+    // Then try to access it again
+    settings = JSON.parse(fs.readFileSync(settingsPath, {encoding: 'utf-8'}))
+    } catch (err) {
+        console.log("didn't work")
+        console.log(err)
+        return
+    }
+
+}
+
+
 // createWindow method
 const createWindow = () => {
 
@@ -113,7 +144,7 @@ app.whenReady().then(() => {
         settings["auto-launch"] = msgToMain
 
         // Change settings file
-        fs.writeFile("./settings.json", JSON.stringify(settings), () => {})
+        fs.writeFileSync(settingsPath, JSON.stringify(settings))
 
         // Update auto-launch accordingly
         let autolaunch = new AutoLaunch({ // Create an autolaunch object
@@ -125,15 +156,17 @@ app.whenReady().then(() => {
         if (settings["auto-launch"]) {
             autolaunch.enable()
         } else {
-             autolaunch.disable()
+            autolaunch.disable()
         } // end if gate
 
     }) // End updateAutoLaunch ipc handler
 
-}) // End whenReady
+    // Handle logs from renderer
+    ipcMain.handle('logMsg', (event, msgToMain) => {
+        logToRenderer(msgToMain)
+    })
 
-// Load settings
-const settings = require("./settings.json")
+}) // End whenReady
 
 // Create HTTP server
 http.createServer(function (req, res) {

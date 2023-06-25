@@ -1,12 +1,13 @@
 console.log("Renderer up")
 
+// Function to handle logging to the renderer and main
+function logToMain(content) {window.ipc.logMsg(content)}
+
 // Get the terminal window
 const terminal = document.getElementById("terminal")
 
 // When main gives us something new to log, log it
 window.ipc.onLog((_event, terminalContents) => {
-
-    console.log("Recieved new log")
 
     // Format the terminal contents and write to the terminal
     terminal.innerText = terminalContents.join("\n")
@@ -28,7 +29,7 @@ window.ipc.onAutoInit((_event, status) => {
 window.ipc.initReady()
 
 // When the slider is selected, update main
-autoSlider.addEventListener("change", (e) => {
+autoSlider.addEventListener("change", (event) => {
 
     // Update main
     window.ipc.updateAutoLaunch(autoSlider.checked)

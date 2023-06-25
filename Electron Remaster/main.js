@@ -1,4 +1,4 @@
-const {app, BrowswerWindow, BrowserWindow, Tray, Menu, nativeImage } = require('electron') // Import electron stuff
+const {app, BrowswerWindow, BrowserWindow, Tray, Menu, nativeImage, ipcMain } = require('electron') // Import electron stuff
 const http = require("http") // Import http module for http server
 const fs = require('fs') // Import file system to handle favicon among other things
 const path = require('path') // Import path for preload
@@ -14,7 +14,7 @@ let mainWindow
 let tray
 
 // Variable that holds the entire contents of the terminal
-let terminalContents = ["Welcome to Cerulean"]
+let terminalContents = ["> Welcome to Cerulean"]
 
 // Icon
 const foxIcon_path = path.join(__dirname, 'hiresicon.ico')
@@ -52,16 +52,6 @@ const createWindow = () => {
 // When the app is ready load the window
 app.whenReady().then(() => {
 
-    // Configure auto-launch
-    // Configure auto-launch here for some reason
-    let autolaunch = new AutoLaunch({ // Create an autolaunch object
-        name: 'ElectronTutorialTest',
-        path: app.getPath('exe'),
-    });
-    autolaunch.isEnabled().then((isEnabled) => { // Check if it is enabled?
-        if (!isEnabled) autolaunch.enable(); // If it is not enabled, enable it
-    })
-
     // Create the window
     createWindow()
     
@@ -72,7 +62,7 @@ app.whenReady().then(() => {
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Open', click: () => {mainWindow.show()}},
         { label: 'Quit', click: () => {mainWindow.destroy();app.quit()}},
-    ])
+    ]) // End menu init
 
     tray.setContextMenu(contextMenu)
 
@@ -83,7 +73,7 @@ app.whenReady().then(() => {
         } else {
             mainWindow.show()
         }
-    })
+    }) // End tray click settings
 
     // Give tray tooltip
     tray.setToolTip("Cerulean")
@@ -106,7 +96,39 @@ app.whenReady().then(() => {
         if (process.platform !== 'darwin') {
           app.quit()
         }
-    })
+    }) // End make it play nice on apple thing
+
+    // Initialize the settings
+    ipcMain.handle("initReady", () => {
+
+        // Set the auto-launch slider
+        mainWindow.webContents.send('autoInit', settings["auto-launch"])
+
+    }) // End initReady handler
+
+    // Handle autolaunch
+    ipcMain.handle("updateAutoLaunch", (event, msgToMain) => {
+
+        // Change settings variable
+        settings["auto-launch"] = msgToMain
+
+        // Change settings file
+        fs.writeFile("./settings.json", JSON.stringify(settings), () => {})
+
+        // Update auto-launch accordingly
+        let autolaunch = new AutoLaunch({ // Create an autolaunch object
+            name: 'ElectronTutorialTest',
+            path: app.getPath('exe'),
+        });
+        
+        // Do the logic
+        if (settings["auto-launch"]) {
+            autolaunch.enable()
+        } else {
+             autolaunch.disable()
+        } // end if gate
+
+    }) // End updateAutoLaunch ipc handler
 
 }) // End whenReady
 
@@ -297,7 +319,7 @@ http.createServer(function (req, res) {
 // Log to renderer function
 function logToRenderer(logText) {
     console.log(logText) // Log it
-    terminalContents.push(logText) // Update the terminal
+    terminalContents.push("> " + logText) // Update the terminal
     try{ // This will only happen if there is not currently a window open
         mainWindow.webContents.send('log', terminalContents) // Send the new terminal
     } catch {

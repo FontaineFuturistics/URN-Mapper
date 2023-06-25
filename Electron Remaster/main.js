@@ -110,7 +110,6 @@ http.createServer(function (req, res) {
         if (req.url == "/favicon.ico") { // Server icon request
             
             // Respond with the webicon (to differentiate from electron's favicon)
-            console.log("Responded to favicon")
             res.write(fs.readFileSync(path.join(__dirname, 'webicon.ico')))
             res.end()
             return
@@ -169,8 +168,10 @@ http.createServer(function (req, res) {
 
         // HTML formatting
         res.write("<!DOCTYPE html>")
-        res.write("<title>Cerulean</title>")
-        res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Go! Search" href="/opensearch.xml"></head>')
+        res.write("<title>Cerulean</title>") // v Really should make this several lines
+        res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Cerulean" href="/opensearch.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"></head>')
+        res.write(`<style>* {font-family: 'IBM Plex Mono', monospace;}</style>`)
+        res.write('<body style="background-image:linear-gradient(to right bottom, #6ce0cd, #2abbb8, #049eaa, #006b8b, #015383, #013a67);background-attachment:fixed;">')
 
         // If there is a single response, give it
         if (response_url != undefined) {
@@ -255,6 +256,9 @@ http.createServer(function (req, res) {
             } // End true-search handling
 
         } // End response composition
+
+        // Put the html footer
+        res.write("</body>")
 
         // End the response
         res.end()

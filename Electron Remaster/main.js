@@ -44,6 +44,9 @@ const createWindow = () => {
         mainWindow.hide()
     })
 
+    // Hide window immediatly
+    mainWindow.hide()
+
 } // End createWindow
 
 // When the app is ready load the window
@@ -73,9 +76,19 @@ app.whenReady().then(() => {
 
     tray.setContextMenu(contextMenu)
 
+    // Make the app toggle visible when you click the icon on the tray
+    tray.on('click', () => {
+        if (mainWindow.isVisible()) {
+            mainWindow.hide()
+        } else {
+            mainWindow.show()
+        }
+    })
+
     // Give tray tooltip
     tray.setToolTip("Cerulean")
     tray.setTitle("REPORT ME IF YOU SEE ME") // I can't find this
+
 
     // Set close settings
 

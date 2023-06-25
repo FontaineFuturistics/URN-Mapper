@@ -1,7 +1,7 @@
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: "./webicon",
+    icon: "./hiresicon",
     name: "Cerulean"
   },
   rebuildConfig: {},

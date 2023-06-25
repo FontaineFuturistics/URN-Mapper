@@ -17,7 +17,7 @@ let tray
 let terminalContents = ["Welcome to Cerulean"]
 
 // Icon
-const foxIcon_path = path.join(__dirname, 'webicon.ico')
+const foxIcon_path = path.join(__dirname, 'hiresicon.ico')
 
 // createWindow method
 const createWindow = () => {
@@ -26,7 +26,7 @@ const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 700,
         height: 400,
-        icon: path.join(__dirname, 'webicon.ico'),
+        icon: path.join(__dirname, 'hiresicon.ico'),
         maximiziable: false,
         resizable: false,
         titleBarStyle: 'hidden',
@@ -110,6 +110,7 @@ http.createServer(function (req, res) {
         if (req.url == "/favicon.ico") { // Server icon request
             
             // Respond with the webicon (to differentiate from electron's favicon)
+            console.log("Responded to favicon")
             res.write(fs.readFileSync(path.join(__dirname, 'webicon.ico')))
             res.end()
             return
@@ -168,7 +169,7 @@ http.createServer(function (req, res) {
 
         // HTML formatting
         res.write("<!DOCTYPE html>")
-        res.write("<title>Go! Search</title>")
+        res.write("<title>Cerulean</title>")
         res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Go! Search" href="/opensearch.xml"></head>')
 
         // If there is a single response, give it

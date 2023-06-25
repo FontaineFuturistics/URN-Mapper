@@ -1,4 +1,4 @@
-const {app, BrowswerWindow, BrowserWindow, Tray, Menu, nativeImage, ipcMain } = require('electron') // Import electron stuff
+const {app, BrowswerWindow, BrowserWindow, Tray, Menu, nativeImage, ipcMain, dialog } = require('electron') // Import electron stuff
 const http = require("http") // Import http module for http server
 const fs = require('fs') // Import file system to handle favicon among other things
 const path = require('path') // Import path for preload
@@ -25,9 +25,6 @@ let settings
 
 // Get path to settings
 settingsPath = path.join(app.getPath("userData"), "settings.json")
-
-// Read settings file into a variable
-//settings = JSON.parse(fs.readFileSync(settingsPath, {encoding: 'utf-8'}))
 
 try {
     // Try to load the settings from userData
@@ -76,7 +73,7 @@ const createWindow = () => {
     })
 
     // Hide window immediatly
-    mainWindow.hide()
+    //mainWindow.hide()
 
 } // End createWindow
 
@@ -166,10 +163,28 @@ app.whenReady().then(() => {
         logToRenderer(msgToMain)
     })
 
+    // Handle selMapFile
+    ipcMain.handle('selMapFile', async () => {
+
+        // Get folder path from user
+        let mapFolPath = await dialog.showOpenDialog({properties: ['openDirectory']})
+
+        let nMP = mapFolPath.filePaths[0]
+
+        // Update settings
+        settings["mappings-path"] = path.join(nMP, "mappings.json")
+
+        // Update settings file
+        refreshSettingsFile()
+
+    })
+
 }) // End whenReady
 
 // Create HTTP server
 http.createServer(function (req, res) {
+
+    //logToRenderer(`Received request ${req.url}`)
 
     // Try block to prevent server crashes
     try {
@@ -192,7 +207,23 @@ http.createServer(function (req, res) {
         } // End special request handler
 
         // Load the mappings (do this for every request so they get updated)
-        let mappings = require("./mappings.json")
+        let mappings
+
+        try {
+            // Try to load the mappings file
+            mappings = JSON.parse(fs.readFileSync(settings["mappings-path"], {encoding: 'utf-8'}))
+        } catch {
+            // If it doesn't load, tell them
+            res.write("<!DOCTYPE html>")
+            res.write("<title>Cerulean</title>") // v Really should make this several lines
+            res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Cerulean" href="/opensearch.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"></head>')
+            res.write(`<style>* {font-family: 'IBM Plex Mono', monospace;}</style>`)
+            res.write('<body style="background-image:linear-gradient(to right bottom, #6ce0cd, #2abbb8, #049eaa, #006b8b, #015383, #013a67);background-attachment:fixed;">')
+            res.write("<p>You do not have a mappings file selected, please select a mappings file</p>")
+            res.write("</body>")
+            res.end()
+            return
+        }
 
         // Extract all the keys for matching later
         let map_keys = Object.keys(mappings).sort()
@@ -413,3 +444,8 @@ function linearStringDiff(string1, string2, tolerance) {
     } // End diff check
  
 } // End linearStringDiff
+
+// Function to refresh settings from the settings variable
+function refreshSettingsFile() {
+    fs.writeFileSync(settingsPath, JSON.stringify(settings))
+}

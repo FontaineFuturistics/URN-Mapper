@@ -6,4 +6,5 @@ contextBridge.exposeInMainWorld("ipc", {
     initReady: () => ipcRenderer.invoke('initReady'),
     updateAutoLaunch: (msgToMain) => ipcRenderer.invoke('updateAutoLaunch', msgToMain),
     logMsg: (msgToMain) => ipcRenderer.invoke('logMsg', msgToMain),
+    selMapFile: () => ipcRenderer.invoke('selMapFile')
 })

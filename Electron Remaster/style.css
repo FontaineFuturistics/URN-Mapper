@@ -13,9 +13,23 @@
     src: url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
 }
 
+/*
+Cool buttons:
+Cyberpunk https://codepen.io/hirodashi/pen/YzGBYBY
+
+
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 .terminalBackground{
     background-color: #00000080;
     border-radius: 7px;
+    margin: 10px 30px 10px 10px;
 }
 
 .scrollDiv{
@@ -25,6 +39,7 @@
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     color:white;
+    margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
 }
 
@@ -38,7 +53,9 @@
     display: flex;
     align-items: center;
     height:20px;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-left: 5px;
 }
 
 .appTitle{
@@ -52,6 +69,10 @@
     font-family: "Oxygen", sans-serif;
     font-weight: 400;
     -webkit-app-region: no-drag;
+}
+
+.ceruleanButton{
+    border-radius: 5px;
 }
 
 /* Box Around Slider */
@@ -118,3 +139,49 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  /* 
+  Fancy Button code 
+  */
+
+  .mcButton {
+    /*background-color: red;*/
+    /*background-image: -webkit-linear-gradient(283deg, rgba(255, 255, 255, 0.1) 50%, transparent 55%),-webkit-linear-gradient(top, rgba(255, 255, 255, 0.15), transparent);*/
+    background-image:  linear-gradient(to right bottom, #6ce0cd, #006b8b);
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px #163772 inset,0 0 0 2px rgba(255, 255, 255, 0.15) inset,0 4px 0 0 #333797,0 4px 0 1px rgba(0, 0, 0, 0.4),0 4px 4px 1px rgba(0, 0, 0, 0.5);
+    color: white !important;
+    display: block;
+    font-family: "Lucida Grande", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    height: 61px;
+    letter-spacing: -1px;
+    line-height: 61px;
+    margin: 20px;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    text-decoration: none !important;
+    -webkit-transition: all .1s linear;
+    width: 186px;
+    }
+    
+    .mcButton:active {
+    background-color: #474EDD;
+    top: 4px;
+    box-shadow: 0 0 0 1px #163772 inset,0 0 0 2px rgba(255, 255, 255, 0.15) inset,0 0 0 0 #333797,0 0 0 1px rgba(0, 0, 0, 0.4),0 0px 8px 1px rgba(0, 0, 0, 0.5);
+    }
+    
+    .mcButton:hover {
+    background-color: #5158E0;
+    position: relative;
+    top: -1px;
+    box-shadow: 0 0 0 1px #163772 inset,0 0 0 2px rgba(255, 255, 255, 0.15) inset,0 5px 0 0 #333797,0 5px 0 1px rgba(0, 0, 0, 0.4),0 5px 8px 1px rgba(0, 0, 0, 0.5);
+    }
+    
+    .mcButton:active {
+    background-color: #474EDD;
+    top: 4px;
+    box-shadow: 0 0 0 1px #163772 inset,0 0 0 2px rgba(255, 255, 255, 0.15) inset,0 0 0 0 #333797,0 0 0 1px rgba(0, 0, 0, 0.4),0 0px 8px 1px rgba(0, 0, 0, 0.5);
+    }

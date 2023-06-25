@@ -25,6 +25,19 @@ window.ipc.onAutoInit((_event, status) => {
 
 })
 
+// Get the mappings file path
+
+// Get the button
+const mapFileSelectButton = document.getElementById("mapFileInput")
+
+// When the button is pressed, do something
+mapFileSelectButton.addEventListener("click", async (event) => {
+
+    // Tell main the user wants to pick a file
+    window.ipc.selMapFile()
+
+})
+
 // Tell main we are ready to init
 window.ipc.initReady()
 

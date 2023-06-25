@@ -1,10 +1,49 @@
+@font-face {
+    font-family: 'IBM Plex Mono', monospace;
+    src: url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+}
+
+@font-face {
+    font-family: 'Signika Negative', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap');
+}
+
+@font-face {
+    font-family: 'Oxygen', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
+}
+
+
 .scrollDiv{
     height: 300px;
     width: 550px;
     overflow-y: auto;
     -webkit-app-region: no-drag;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
 }
 
-.drag{
+.body{
     -webkit-app-region: drag;
+    background-image:  linear-gradient(to right bottom, #6ce0cd, #2abbb8, #049eaa, #006b8b, #015383, #013a67);
+    background-attachment: fixed;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    height:20px;
+    padding-bottom: 20px;
+}
+
+.appTitle{
+    padding-left: 15px;
+    font-family: "Signika Negative", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.settings{
+    font-family: "Oxygen", sans-serif;
+    font-weight: 400;
 }

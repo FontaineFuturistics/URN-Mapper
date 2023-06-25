@@ -14,7 +14,7 @@ let mainWindow
 let tray
 
 // Variable that holds the entire contents of the terminal
-let terminalContents = ["Welcome to the URN-Mapper!"]
+let terminalContents = ["Welcome to Cerulean"]
 
 // Icon
 const foxIcon_path = path.join(__dirname, 'webicon.ico')
@@ -74,8 +74,8 @@ app.whenReady().then(() => {
     tray.setContextMenu(contextMenu)
 
     // Give tray tooltip
-    tray.setToolTip("Tooltip")
-    tray.setTitle("Title")
+    tray.setToolTip("Cerulean")
+    tray.setTitle("REPORT ME IF YOU SEE ME") // I can't find this
 
     // Set close settings
 

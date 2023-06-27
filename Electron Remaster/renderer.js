@@ -52,8 +52,17 @@ newMappingButton.addEventListener("click", async (event) => {
 
 })
 
-// Tell main we are ready to init
-window.ipc.initReady()
+// Handle close button
+
+// Get the button
+const closeButton = document.getElementById("closeButton")
+
+closeButton.addEventListener("click", (event) => {
+
+    // Tell main
+    window.ipc.hideMain()
+
+})
 
 // When the slider is selected, update main
 autoSlider.addEventListener("change", (event) => {
@@ -62,3 +71,6 @@ autoSlider.addEventListener("change", (event) => {
     window.ipc.updateAutoLaunch(autoSlider.checked)
 
 })
+
+// Tell main we are ready to init
+window.ipc.initReady()

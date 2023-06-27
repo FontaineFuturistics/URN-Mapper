@@ -5,3 +5,5 @@ Task Backlog
     -settings tab
     -use folders
     -download fonts
+    -implement stub generateDefaultMappings function
+    -close button in settings

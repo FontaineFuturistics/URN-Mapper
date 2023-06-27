@@ -10,5 +10,6 @@ contextBridge.exposeInMainWorld("ipc", {
     launchNewMapping: () => ipcRenderer.invoke('launchNewMapping'),
     addMapping: (msgToMain) => ipcRenderer.invoke('addMapping', msgToMain),
     cancelMapping: () => ipcRenderer.invoke('cancelMapping'),
-    errorClose: () => ipcRenderer.invoke("errorClose")
+    errorClose: () => ipcRenderer.invoke("errorClose"),
+    hideMain: () => ipcRenderer.invoke('hideMain'),
 })

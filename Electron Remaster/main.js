@@ -57,7 +57,7 @@ const createWindow = () => {
         maximiziable: false,
         resizable: false,
         titleBarStyle: 'hidden',
-        titleBarOverlay: true,
+        titleBarOverlay: false,
         webPreferences: { // Attach preloader
             preload: path.join(__dirname, 'preload.js')
         }
@@ -308,6 +308,14 @@ app.whenReady().then(() => {
         errorWindow.close()
 
     }) // End handle error close
+
+    // Hide main window
+    ipcMain.handle('hideMain', (event) => {
+
+        // Hide the main window
+        mainWindow.close();
+
+    })
 
 }) // End whenReady
 

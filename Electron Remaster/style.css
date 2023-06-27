@@ -253,3 +253,22 @@ Cyberpunk https://codepen.io/hirodashi/pen/YzGBYBY
     flex:1;
     margin:10px;
   }
+
+  .closeButton {
+    -webkit-app-region: no-drag;
+    border-radius: 0px 0px 0px 7px;
+    width:32px;
+    height:32px;
+    float:right;
+    margin-left: auto;
+    background-color: rgba(0, 0, 0, 0.1);
+    outline:none;
+    border:none;
+    fill:black;
+  }
+
+  .closeButton:hover {
+    fill:white;
+    background-color: rgb(200, 0, 0);
+    box-shadow: 0 0 10px red;
+  }

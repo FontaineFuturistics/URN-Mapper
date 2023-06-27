@@ -38,6 +38,20 @@ mapFileSelectButton.addEventListener("click", async (event) => {
 
 })
 
+
+// Display new mapping window
+
+// Get the button
+const newMappingButton = document.getElementById("launchNewMappingButton")
+
+// When the button is pressed, do something
+newMappingButton.addEventListener("click", async (event) => {
+
+    // Tell main the user wants to pick a file
+    window.ipc.launchNewMapping()
+
+})
+
 // Tell main we are ready to init
 window.ipc.initReady()
 

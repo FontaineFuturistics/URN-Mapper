@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <!--Because otherwise electron whines-->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+
+    <!--Style Sheet Reference-->
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Please Select a Location for Mapping File</title>
+
+</head>
+
+<body class="body">
+
+    <h3 class="errorMsg">Please Select a Location for the Mapping File</h3>
+
+    <span class="center"><span class="mcButtonWrapper"><button class="mcButton" id="closeButton">Close</button></span></span>
+
+</body>
+
+<script src="./errorrenderer.js"></script>
+
+</html>

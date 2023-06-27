@@ -6,5 +6,9 @@ contextBridge.exposeInMainWorld("ipc", {
     initReady: () => ipcRenderer.invoke('initReady'),
     updateAutoLaunch: (msgToMain) => ipcRenderer.invoke('updateAutoLaunch', msgToMain),
     logMsg: (msgToMain) => ipcRenderer.invoke('logMsg', msgToMain),
-    selMapFile: () => ipcRenderer.invoke('selMapFile')
+    selMapFile: () => ipcRenderer.invoke('selMapFile'),
+    launchNewMapping: () => ipcRenderer.invoke('launchNewMapping'),
+    addMapping: (msgToMain) => ipcRenderer.invoke('addMapping', msgToMain),
+    cancelMapping: () => ipcRenderer.invoke('cancelMapping'),
+    errorClose: () => ipcRenderer.invoke("errorClose")
 })

@@ -155,5 +155,11 @@
     "ddx": "https://www.dododex.com/",
     "gt": "https://translate.google.com/",
     "fonts": "https://fonts.google.com/",
-    "electron": "https://www.electronjs.org/"
+    "electron": "https://www.electronjs.org/",
+    "electronapi": "https://www.electronjs.org/docs/latest/api/app",
+    "onion": "https://www.theonion.com/",
+    "peraton": "https://sso.peraton.com",
+    "diepio": "https://diep.io/",
+    "lego": "https://lego.com/",
+    "mcdqual": "https://mcdaniel.az1.qualtrics.com/homepage/ui?LoginAction=Homepage"
 }

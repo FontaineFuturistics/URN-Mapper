@@ -29,22 +29,24 @@ Cyberpunk https://codepen.io/hirodashi/pen/YzGBYBY
 .terminalBackground{
     background-color: #00000080;
     border-radius: 7px;
-    margin: 10px 30px 10px 10px;
+    margin: 10px 30px 5px 10px;
 }
 
 .scrollDiv{
     height: 280px;
     overflow-y: auto;
     -webkit-app-region: no-drag;
+    -webkit-user-select: text;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 500;
     color:white;
-    margin: 5px 5px 5px 5px;
+    margin: 5px 0px 5px 5px;
     padding: 5px 5px 5px 5px;
 }
 
 .body{
     -webkit-app-region: drag;
+    -webkit-user-select: none;
     background-image:  linear-gradient(to right bottom, #6ce0cd, #2abbb8, #049eaa, #006b8b, #015383, #013a67);
     background-attachment: fixed;
 }
@@ -69,11 +71,43 @@ Cyberpunk https://codepen.io/hirodashi/pen/YzGBYBY
     font-family: "Oxygen", sans-serif;
     font-weight: 400;
     -webkit-app-region: no-drag;
+    margin: 5px 10px 10px 10px;
 }
 
 .ceruleanButton{
     border-radius: 5px;
 }
+
+.mapWrap {
+  display: flex;
+}
+
+.mapCol {
+  font-family: "Oxygen", sans-serif;
+  font-weight: 400;
+  margin:10px;
+  display:block;
+  justify-content: center;
+}
+
+.textInput {
+  color:white;
+  padding:2px;
+  -webkit-app-region:no-drag;
+  margin:10px;
+  width:180px;
+  background-color: #00000080;
+  border-radius: 5px;
+  border:2px solid rgba(0, 0, 0, 0.2);
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.textInput:focus {
+  outline:none;
+  border:2px solid rgba(0, 255, 255, .5);
+  box-shadow: inset 0 0 8px aqua, 0 0 2px aqua;
+}
+
 
 /* Box Around Slider */
 .switch {
@@ -144,24 +178,78 @@ Cyberpunk https://codepen.io/hirodashi/pen/YzGBYBY
   Fancy Button code 
   */
 
+  .mcButtonWrapper {
+    border:2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    margin:0px 5px 5px 5px;
+    display:inline-flex;
+    -webkit-app-region: no-drag;
+  }
+
   .mcButton {
-    /*background-image: -webkit-linear-gradient(283deg, rgba(255, 255, 255, 0.1) 50%, transparent 55%),-webkit-linear-gradient(top, rgba(255, 255, 255, 0.15), transparent);*/
-    background-image:  linear-gradient(to right bottom, #6ce0cd, #006b8b);
-    border-radius: 6px;
-    box-shadow: 0 4px 0 0 #013a67;
-    display: block;
-    height: 30px;
-    line-height: 30px;
-    margin: 20px;
+    color:white;
+    font-weight: 600;
+    height: 20px;
+    width: 140px;
+    line-height: 20px;
+    border-radius: 5px;
+    background-image: linear-gradient(to right bottom, #6ce0cd, #1e7064);
+    text-align:center;
+    border: none;
+    box-shadow: 0px 6px #00465c, 5px 14px 20px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.3);
     position: relative;
-    text-align: center;
-    font-weight:600;
     -webkit-transition: all .1s ease-in-out;
-    -webkit-user-select: none;
-    width: 186px;
-    }
-    
-    .mcButton:active {
-    top: 4px;
-    box-shadow: 0 0 0 0 #013a67;
-    }
+    transition: all .1 ease-in-out;
+    top:-6px;
+  }
+
+  .mcButton:active {
+    /*border: 2px solid aqua;*/
+    /*box-shadow: none;*/
+    box-shadow: inset 0 0 8px aqua, 0 0 2px aqua;
+    top: 0px;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1 ease-in-out;
+    color:aqua;
+    text-shadow: 2px 2px 5px aqua;
+  }
+
+  .mcButton:focus {
+    outline:none;
+    box-shadow: inset 0 0 8px aqua, 0 0 2px aqua;
+  }
+
+  /* Configure Scroll Bar
+  ::-webkit-scrollbar {
+    width: 10px;
+  }*/
+
+  .npmBut {
+    width:180px;
+  }
+
+  .errorMsg {
+    color:red;
+    font-family: "Signika Negative", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    margin: 20px;
+  }
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttonRow {
+    margin:20px 20px 20px 5px;
+    display:flex;
+    flex:content;
+  }
+
+  .horSpac {
+    flex:1;
+    margin:10px;
+  }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <!--Because otherwise electron whines-->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+
+    <!--Style Sheet Reference-->
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Add New Mapping</title>
+
+</head>
+
+<body class="body">
+
+    <div class="mapWrap">
+
+        <div class="mapCol">
+
+            <input type="text" class="textInput" id="keyInput" tabindex="1">
+
+            <span class="mcButtonWrapper npmButWrap"><button class="npmBut mcButton" id="cancelButton" tabindex="3">Cancel</button></span>
+
+            
+
+        </div>
+
+        <div class="mapCol">
+
+            <input type="text" class="textInput" id="valueInput" tabindex="2">
+
+            <span class="mcButtonWrapper npmButWrap"><button class="npmBut mcButton" id="addButton" tabindex="4">Add / Update</button></span>
+            
+        </div>
+
+    </div>
+
+        <br />
+
+    
+
+</body>
+
+<script src="./promptrenderer.js"></script>
+
+</html>

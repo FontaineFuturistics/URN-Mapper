@@ -46,7 +46,6 @@ try {
 
 }
 
-
 // createWindow method
 const createWindow = () => {
 
@@ -73,9 +72,65 @@ const createWindow = () => {
     })
 
     // Hide window immediatly
-    mainWindow.hide()
+    //mainWindow.hide()
 
 } // End createWindow
+
+// Variable for new mapping prompt window
+let promptWindow
+
+const promptNewMapping = () => {
+
+    promptWindow = new BrowserWindow({
+        width:450,
+        height:120,
+        icon: path.join(__dirname, 'hiresicon.ico'),
+        maximiziable: false,
+        resizable: false,
+        titleBarStyle: 'hidden',
+        webPreferences: { // Attach preloader
+            preload: path.join(__dirname, 'preload.js')
+        }
+    }) // End promptWindow initialize
+
+    // Load the html file
+    promptWindow.loadFile('newmapping.html')
+
+    // Configure close behavior
+    promptWindow.on('close', (e) => {
+        e.preventDefault()
+        promptWindow.destroy()
+    })
+
+} // End promptNewMapping
+
+// Variable for mapping error window
+let errorWindow
+
+const createErrorWindow = () => {
+
+    errorWindow = new BrowserWindow({
+        width:450,
+        height:120,
+        icon: path.join(__dirname, 'hiresicon.ico'),
+        maximiziable: false,
+        resizable: false,
+        titleBarStyle: 'hidden',
+        webPreferences: { // Attach preloader
+            preload: path.join(__dirname, 'preload.js')
+        }
+    }) // End promptWindow initialize
+
+    // Load the html file
+    errorWindow.loadFile('maperror.html')
+
+    // Configure close behavior
+    errorWindow.on('close', (e) => {
+        e.preventDefault()
+        errorWindow.destroy()
+    })
+
+} // End promptNewMapping
 
 // When the app is ready load the window
 app.whenReady().then(() => {
@@ -179,6 +234,81 @@ app.whenReady().then(() => {
 
     })
 
+    // Handle launchNewMapping
+    ipcMain.handle('launchNewMapping', () => {
+
+        // Launch the window
+        promptNewMapping()
+
+    }) // End handle launchNewMapping
+
+    // Handle addMapping
+    ipcMain.handle('addMapping', (event, msgToMain) => {
+
+        // Get the key/value pair out of the msg
+        let newKey = msgToMain[0]
+        let newValue = msgToMain[1]
+
+        // Make mappings variable
+        let mappings
+
+        // See if there is a mappings path
+        if (!settings["mappings-path"]) {
+            
+            // Display error
+            createErrorWindow()
+
+            // Close mapping add window
+            promptWindow.close()
+
+            // Quit
+            return
+
+        } // End mappings path check
+
+        // Try to access mappings file
+        try {
+            mappings = JSON.parse(fs.readFileSync(settings["mappings-path"], {encoding: 'utf-8'}))
+        } catch {
+
+            // If the mappings file does not exist create it
+            createDefaultMappings()
+
+            // Now load the mappings file
+            mappings = JSON.parse(fs.readFileSync(settings["mappings-path"], {encoding: 'utf-8'}))
+
+        }
+
+        // Write to the mappings file
+        mappings[newKey] = newValue
+
+        // Save mappings file
+        fs.writeFileSync(settings["mappings-path"], JSON.stringify(mappings, null, 2))
+
+        // Write to the console
+        logToRenderer(`Adding new mapping ${newKey} for url ${newValue}`)
+
+        // Close prompt window
+        promptWindow.close()
+
+    })
+
+    // Handle cancelMapping
+    ipcMain.handle('cancelMapping', () => {
+
+        // Close the window
+        promptWindow.close();
+
+    })
+
+    // Handle error close
+    ipcMain.handle("errorClose", (event) => {
+        
+        // Close the error window
+        errorWindow.close()
+
+    }) // End handle error close
+
 }) // End whenReady
 
 // Create HTTP server
@@ -209,20 +339,31 @@ http.createServer(function (req, res) {
         // Load the mappings (do this for every request so they get updated)
         let mappings
 
+        // See if there is a mappings path
+        if (!settings["mappings-path"]) {
+            
+            // Display error
+            createErrorWindow()
+
+            // Close mapping add window
+            promptWindow.close()
+
+            // Quit
+            return
+
+        } // End mappings path check
+
+        // Try to access mappings file
         try {
-            // Try to load the mappings file
             mappings = JSON.parse(fs.readFileSync(settings["mappings-path"], {encoding: 'utf-8'}))
         } catch {
-            // If it doesn't load, tell them
-            res.write("<!DOCTYPE html>")
-            res.write("<title>Cerulean</title>") // v Really should make this several lines
-            res.write('<head><link rel="search" type="application/opensearchdescription+xml" title="Cerulean" href="/opensearch.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"></head>')
-            res.write(`<style>* {font-family: 'IBM Plex Mono', monospace;}</style>`)
-            res.write('<body style="background-image:linear-gradient(to right bottom, #6ce0cd, #2abbb8, #049eaa, #006b8b, #015383, #013a67);background-attachment:fixed;">')
-            res.write("<p>You do not have a mappings file selected, please select a mappings file</p>")
-            res.write("</body>")
-            res.end()
-            return
+
+            // If the mappings file does not exist create it
+            createDefaultMappings()
+
+            // Now load the mappings file
+            mappings = JSON.parse(fs.readFileSync(settings["mappings-path"], {encoding: 'utf-8'}))
+            
         }
 
         // Extract all the keys for matching later
@@ -448,4 +589,8 @@ function linearStringDiff(string1, string2, tolerance) {
 // Function to refresh settings from the settings variable
 function refreshSettingsFile() {
     fs.writeFileSync(settingsPath, JSON.stringify(settings))
+}
+
+function createDefaultMappings() {
+    console.log("Not implemented")
 }

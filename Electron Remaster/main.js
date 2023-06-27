@@ -72,7 +72,7 @@ const createWindow = () => {
     })
 
     // Hide window immediatly
-    //mainWindow.hide()
+    mainWindow.hide()
 
 } // End createWindow
 

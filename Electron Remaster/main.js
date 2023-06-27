@@ -17,7 +17,7 @@ let tray
 let terminalContents = ["> Welcome to Cerulean"]
 
 // Icon
-const iconPath = path.join(__dirname, 'hiresicon.ico')
+const iconPath = path.join(__dirname, './img/hiresicon.ico')
 
 // Load settings
 // Make settings global
@@ -33,7 +33,7 @@ try {
 } catch {
 
     // If it doesn't work, create the settings first
-    fs.writeFileSync(path.join(app.getPath("userData"), "settings.json"), JSON.stringify(require(path.join(__dirname, "settings.json"))))
+    fs.writeFileSync(path.join(app.getPath("userData"), "settings.json"), JSON.stringify(require(path.join(__dirname, "./config/settings.json"))))
 
     try {
     // Then try to access it again
@@ -53,18 +53,18 @@ const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 700,
         height: 400,
-        icon: path.join(__dirname, 'hiresicon.ico'),
+        icon: iconPath,
         maximiziable: false,
         resizable: false,
         titleBarStyle: 'hidden',
         titleBarOverlay: false,
         webPreferences: { // Attach preloader
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, './preload.js')
         }
     }) // End mainWindow initialize
 
     // load the html file
-    mainWindow.loadFile('index.html')
+    mainWindow.loadFile('./html/index.html')
 
     mainWindow.on('close', (e) => {
         e.preventDefault()
@@ -72,7 +72,7 @@ const createWindow = () => {
     })
 
     // Hide window immediatly
-    mainWindow.hide()
+    //mainWindow.hide()
 
 } // End createWindow
 
@@ -84,17 +84,17 @@ const promptNewMapping = () => {
     promptWindow = new BrowserWindow({
         width:450,
         height:120,
-        icon: path.join(__dirname, 'hiresicon.ico'),
+        icon: iconPath,
         maximiziable: false,
         resizable: false,
         titleBarStyle: 'hidden',
         webPreferences: { // Attach preloader
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, './preload.js')
         }
     }) // End promptWindow initialize
 
     // Load the html file
-    promptWindow.loadFile('newmapping.html')
+    promptWindow.loadFile('./html/newmapping.html')
 
     // Configure close behavior
     promptWindow.on('close', (e) => {
@@ -112,17 +112,17 @@ const createErrorWindow = () => {
     errorWindow = new BrowserWindow({
         width:450,
         height:120,
-        icon: path.join(__dirname, 'hiresicon.ico'),
+        icon: iconPath,
         maximiziable: false,
         resizable: false,
         titleBarStyle: 'hidden',
         webPreferences: { // Attach preloader
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, './preload.js')
         }
     }) // End promptWindow initialize
 
     // Load the html file
-    errorWindow.loadFile('maperror.html')
+    errorWindow.loadFile('./html/maperror.html')
 
     // Configure close behavior
     errorWindow.on('close', (e) => {
@@ -331,13 +331,13 @@ http.createServer(function (req, res) {
         if (req.url == "/favicon.ico") { // Server icon request
             
             // Respond with the webicon (to differentiate from electron's favicon)
-            res.write(fs.readFileSync(path.join(__dirname, 'webicon.ico')))
+            res.write(fs.readFileSync(path.join(__dirname, './img/webicon.ico')))
             res.end()
             return
 
         } else if (req.url == "/openserver.xml") { // Firefox's opensearch request
 
-            res.write(fs.readFileSync("./opensearch.xml"))
+            res.write(fs.readFileSync("./config/opensearch.xml"))
             res.end()
             console.log("Responded to opensearch.xml query")
             return
@@ -599,6 +599,10 @@ function refreshSettingsFile() {
     fs.writeFileSync(settingsPath, JSON.stringify(settings))
 }
 
+// Function to create default mappings if they do not exist in the directory the user specified
 function createDefaultMappings() {
-    console.log("Not implemented")
+
+    // Write to the path
+    fs.writeFileSync(settings["mappings-path"], JSON.stringify(require(path.join(__dirname, "./config/mappings.json"))))
+
 }

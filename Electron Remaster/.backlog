@@ -1,9 +1,0 @@
-Task Backlog
-    -mappings.json create default
-    -sound for buttons
-    -customize slider
-    -settings tab
-    -use folders
-    -download fonts
-    -implement stub generateDefaultMappings function
-    -close button in settings

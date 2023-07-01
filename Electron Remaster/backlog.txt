@@ -1,0 +1,8 @@
+Task Backlog
+    -mappings.json create default
+    -sound for buttons
+    -customize scroll bar
+    -use folders
+    -download fonts
+    -implement stub generateDefaultMappings function
+    -make mapping file select accept file or folder

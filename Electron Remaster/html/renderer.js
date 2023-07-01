@@ -14,7 +14,7 @@ window.ipc.onLog((_event, terminalContents) => {
 
 })
 
-// Get the autoslider
+/*// Get the autoslider
 const autoSlider = document.getElementById("autoSlider")
 
 // Set slider when init
@@ -23,9 +23,9 @@ window.ipc.onAutoInit((_event, status) => {
     // Set the slider
     autoSlider.checked = status
 
-})
+})*/
 
-// Get the mappings file path
+/*// Get the mappings file path
 
 // Get the button
 const mapFileSelectButton = document.getElementById("mapFileInput")
@@ -36,10 +36,10 @@ mapFileSelectButton.addEventListener("click", async (event) => {
     // Tell main the user wants to pick a file
     window.ipc.selMapFile()
 
-})
+})*/
 
 
-// Display new mapping window
+/*// Display new mapping window
 
 // Get the button
 const newMappingButton = document.getElementById("launchNewMappingButton")
@@ -50,7 +50,7 @@ newMappingButton.addEventListener("click", async (event) => {
     // Tell main the user wants to pick a file
     window.ipc.launchNewMapping()
 
-})
+})*/
 
 // Handle close button
 
@@ -64,13 +64,20 @@ closeButton.addEventListener("click", (event) => {
 
 })
 
-// When the slider is selected, update main
+/*// When the slider is selected, update main
 autoSlider.addEventListener("change", (event) => {
 
     // Update main
     window.ipc.updateAutoLaunch(autoSlider.checked)
 
-})
+})*/
 
-// Tell main we are ready to init
-window.ipc.initReady()
+// Handle settings button
+let settingsButton = document.getElementById("settingsButton")
+
+settingsButton.addEventListener("click", (event) => {
+
+    // Tell main
+    window.ipc.openSettings()
+
+})

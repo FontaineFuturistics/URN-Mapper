@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <!--Because otherwise electron whines-->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+
+    <!--Style Sheet Reference-->
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Settings</title>
+
+</head>
+
+<body class="body">
+
+    <div class="settingsHeader">
+
+      <p class="appTitle">Settings</p>
+
+        <svg class="closeButton" id="closeButton" height="32" viewBox="0 -960 960 960" width="32"><path d="m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg>
+
+    </div>
+
+    <div class="settings">
+
+      <div class="vSpacer"></div>
+        
+      <span>Auto-launch: <label class="switch"><input id="autoSlider" type="checkbox"><span class="slider round"></span></label></span>
+
+      <div class="vSpacer"></div>
+
+      <span class="mcButtonWrapper"><button class="mcButton" id="mapFileInput">Select Mappings File</button></span>
+
+      <div class="vSpacer"></div>
+
+      <span class="mcButtonWrapper"><button class="mcButton" id="launchNewMappingButton">Add New Mapping</button></span>
+
+      <div class="vSpacer"></div>
+
+      <span class="quitButtonWrapper"><button class="quitButton" id="exitButton">Close Cerulean</button></span>
+
+    </div>
+
+</body>
+
+<script src="./settingsrenderer.js"></script>
+
+</html>

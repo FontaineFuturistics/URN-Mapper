@@ -49,6 +49,11 @@ try {
 // createWindow method
 const createWindow = () => {
 
+    // When we are asked to create the main window, see if one already exists first
+    try {
+        if (!mainWindow.isDestroyed()) {return} // If it isn't destroyed it already exists we shouldn't do anything
+    } catch {} // If we error out it hasn't been instantiated yet
+
     // Initialize the window
     mainWindow = new BrowserWindow({
         width: 700,
@@ -69,6 +74,12 @@ const createWindow = () => {
     mainWindow.on('close', (e) => {
         e.preventDefault()
         mainWindow.hide()
+
+        // Try to close all other windows as well
+        try {promptWindow.close()} catch {}
+        try {errorWindow.close()} catch {}
+        try {settingsWindow.close()} catch {}
+
     })
 
     // Hide window immediatly
@@ -80,6 +91,11 @@ const createWindow = () => {
 let promptWindow
 
 const promptNewMapping = () => {
+
+    // When we are asked to create the prompt window, see if one already exists first
+    try {
+        if (!promptWindow.isDestroyed()) {return} // If it isn't destroyed it already exists we shouldn't do anything
+    } catch {} // If we error out it hasn't been instantiated yet
 
     promptWindow = new BrowserWindow({
         width:450,
@@ -109,6 +125,11 @@ let errorWindow
 
 const createErrorWindow = () => {
 
+    // When we are asked to create the error window, see if one already exists first
+    try {
+        if (!errorWindow.isDestroyed()) {return} // If it isn't destroyed it already exists we shouldn't do anything
+    } catch {} // If we error out it hasn't been instantiated yet
+
     errorWindow = new BrowserWindow({
         width:450,
         height:120,
@@ -131,6 +152,39 @@ const createErrorWindow = () => {
     })
 
 } // End promptNewMapping
+
+// Variable for settings window
+let settingsWindow
+
+createSettingsWindow = () => {
+
+    // When we are asked to create the settings window, see if one already exists first
+    try {
+        if (!settingsWindow.isDestroyed()) {return} // If it isn't destroyed it already exists we shouldn't do anything
+    } catch {} // If we error out it hasn't been instantiated yet
+
+    settingsWindow = new BrowserWindow({
+        width:200,
+        height:300,
+        icon: iconPath,
+        maximiziable: false,
+        resizable: false,
+        titleBarStyle: 'hidden',
+        webPreferences: { // Attach preloader
+            preload: path.join(__dirname, './preload.js')
+        }
+    }) // End promptWindow initialize
+
+    // Load the html file
+    settingsWindow.loadFile('./html/settings.html')
+
+    // Configure close behavior
+    settingsWindow.on('close', (e) => {
+        e.preventDefault()
+        settingsWindow.destroy()
+    })
+    
+}
 
 // When the app is ready load the window
 app.whenReady().then(() => {
@@ -185,7 +239,7 @@ app.whenReady().then(() => {
     ipcMain.handle("initReady", () => {
 
         // Set the auto-launch slider
-        mainWindow.webContents.send('autoInit', settings["auto-launch"])
+        settingsWindow.webContents.send('autoInit', settings["auto-launch"])
 
     }) // End initReady handler
 
@@ -314,6 +368,32 @@ app.whenReady().then(() => {
 
         // Hide the main window
         mainWindow.close();
+
+    })
+
+    // Open settings
+    ipcMain.handle("openSettings", (event) => {
+
+        // Open the settings window
+        createSettingsWindow()
+
+    })
+
+    // Close settings
+    ipcMain.handle('closeSettings', (event) => {
+
+        // Close settings window
+        settingsWindow.close()
+
+    })
+
+    // Quit app
+    ipcMain.handle("quitApp", (event) => {
+
+        // Close everything and quit
+        mainWindow.close() // This closes all window
+        mainWindow.destroy() // This destroys the main window
+        app.quit() // Finally leave the app
 
     })
 

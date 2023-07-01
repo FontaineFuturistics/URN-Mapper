@@ -12,4 +12,7 @@ contextBridge.exposeInMainWorld("ipc", {
     cancelMapping: () => ipcRenderer.invoke('cancelMapping'),
     errorClose: () => ipcRenderer.invoke("errorClose"),
     hideMain: () => ipcRenderer.invoke('hideMain'),
+    openSettings: () => ipcRenderer.invoke('openSettings'),
+    closeSettings: () => ipcRenderer.invoke('closeSettings'),
+    quitApp: () => ipcRenderer.invoke("quitApp"),
 })

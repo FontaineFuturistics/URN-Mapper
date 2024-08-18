@@ -487,7 +487,7 @@ http.createServer(function (req, res) {
             response_key_list = getMatches(search_key, map_keys)
 
             // If there is only 1 match, collapse the list
-            if (response_key_list.length == 1) {response_url = response_key_list[0]}
+            if (response_key_list.length == 1) {response_url = mappings[response_key_list[0]]}
         }
 
         /* * * * * * *
@@ -541,7 +541,7 @@ http.createServer(function (req, res) {
         } else if (search_key === settings["json"]) {
 
             // Turn the json into html
-            res.write(fs.readFileSync("./mappings.json").toString('utf-8').replace(new RegExp("\n", 'g'), "</br >"))
+            res.write(fs.readFileSync(settings["mappings-path"]).toString('utf-8').replace(new RegExp("\n", 'g'), "</br >"))
 
             // Log it
             logToRenderer(`Showed user ${req.socket.remoteAddress.replace("::1", "localhost")} json mappings`)

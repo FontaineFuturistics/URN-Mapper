@@ -6,3 +6,4 @@ Task Backlog
     -download fonts
     -implement stub generateDefaultMappings function
     -make mapping file select accept file or folder
+    -make redicrect on autocorrect work
